@@ -136,26 +136,32 @@ namespace NamPhuThuy.VFX
             return v;
         }
 
-        // convenience
         public VFXBase PlayAt(
             VFXType type = VFXType.NONE, 
-            Vector3 pos = default, 
             int amount = 0, 
             string message = null, 
-            float duration = 0,
             Transform initialParent = null, 
             Transform target = null,
+            Vector3 pos = default,
+            Vector3 offset = default,
+            Quaternion rot = default,
+            float duration = 0,
+            bool isLooping = false, 
+            Color color = default,
             System.Action onArrive = null, 
             System.Action onComplete = null)
         {
             return Play(type, new VFXArguments {
-                worldPos = pos,
-                worldRot = Quaternion.identity,
                 amount = amount,
                 message = message,
-                duration = duration,
                 initialParent = initialParent,
                 target = target,
+                worldPos = pos,
+                offset = offset,
+                worldRot = rot,
+                isLooping = isLooping,
+                duration = duration,
+                color = color,
                 onArrive = onArrive,
                 onComplete = onComplete
             });

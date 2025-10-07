@@ -11,10 +11,12 @@ namespace NamPhuThuy.VFX
         public string message;        // e.g., "+3 Moves"
         public Transform initialParent; // where to spawn (if needed)
         public Transform target;      // where to fly/attach
-        public Vector3 worldPos;      // spawn position (if needed)
+        public Vector3 worldPos;      
+        public Vector3 offset;
         public Quaternion worldRot;   // spawn rotation (optional)
         public bool isLooping;
         public float duration;
+        public Color color;
         
         
         // lifecycle callbacks (all optional)
