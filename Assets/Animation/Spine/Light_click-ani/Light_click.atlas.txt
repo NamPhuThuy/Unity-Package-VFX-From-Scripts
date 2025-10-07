@@ -1,0 +1,13 @@
+
+Light_click.png
+size: 172,172
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Circle_light_1
+  rotate: false
+  xy: 4, 4
+  size: 164, 164
+  orig: 164, 164
+  offset: 0, 0
+  index: -1

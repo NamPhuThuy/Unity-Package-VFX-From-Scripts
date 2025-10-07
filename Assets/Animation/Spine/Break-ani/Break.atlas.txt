@@ -1,0 +1,41 @@
+
+Break.png
+size: 972,760
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Brick_Flower copy 2
+  rotate: false
+  xy: 4, 263
+  size: 490, 490
+  orig: 490, 490
+  offset: 0, 0
+  index: -1
+Tile_Broken_1
+  rotate: false
+  xy: 4, 11
+  size: 333, 248
+  orig: 333, 248
+  offset: 0, 0
+  index: -1
+Tile_Broken_2
+  rotate: true
+  xy: 341, 15
+  size: 244, 337
+  orig: 244, 337
+  offset: 0, 0
+  index: -1
+Tile_Broken_3
+  rotate: false
+  xy: 682, 4
+  size: 272, 367
+  orig: 272, 367
+  offset: 0, 0
+  index: -1
+Tile_Broken_4
+  rotate: true
+  xy: 682, 375
+  size: 378, 283
+  orig: 378, 283
+  offset: 0, 0
+  index: -1

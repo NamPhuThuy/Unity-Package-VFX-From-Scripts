@@ -1,0 +1,55 @@
+
+Gift Box.png
+size: 1928,748
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1tiasang1
+  rotate: true
+  xy: 1655, 23
+  size: 128, 117
+  orig: 128, 117
+  offset: 0, 0
+  index: -1
+Box_MS
+  rotate: true
+  xy: 1219, 101
+  size: 640, 432
+  orig: 640, 432
+  offset: 0, 0
+  index: -1
+Box_MT
+  rotate: true
+  xy: 843, 91
+  size: 650, 372
+  orig: 650, 372
+  offset: 0, 0
+  index: -1
+Lid_Box
+  rotate: true
+  xy: 491, 36
+  size: 705, 348
+  orig: 705, 348
+  offset: 0, 0
+  index: -1
+as21
+  rotate: true
+  xy: 843, 39
+  size: 48, 47
+  orig: 48, 47
+  offset: 0, 0
+  index: -1
+as31
+  rotate: true
+  xy: 4, 4
+  size: 737, 483
+  orig: 737, 483
+  offset: 0, 0
+  index: -1
+ribbon bow
+  rotate: true
+  xy: 1655, 155
+  size: 586, 267
+  orig: 586, 267
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,34 @@
+{
+    "name": "com.namphuthuy.vfxfromscripts",
+    "version": "1.0.0",
+    "displayName": "VFX From Scripts",
+    "description": "Bunch of vfx that use scripts.",
+    "unity": "6000.0",
+    "categories": 
+    [
+        "Tools",
+        "Visual Effects",
+        "Animation"
+    ],
+    "keywords": 
+    [
+        "unity",
+        "vfx",
+        "particles",
+        "tools"
+    ],
+    "dependencies": 
+    {
+        "com.unity.textmeshpro": "3.0.6",
+        "com.unity.ugui": "1.0.0"   
+    },
+    "author": 
+    {
+        "name": "NamPhuThuy",
+        "email": "ttnam957@gmail.com",
+        "url": "https://github.com/NamPhuThuy"
+    },
+    "license": "MIT",
+    "changelogUrl": "https://github.com/NamPhuThuy/VFXFromScripts/blob/main/CHANGELOG.md",
+    "documentationUrl": "https://github.com/NamPhuThuy/VFXFromScripts/blob/main/README.md"
+}

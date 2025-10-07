@@ -1,0 +1,20 @@
+
+gift_2.png
+size: 216,148
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Chess/anim/gift_5
+  rotate: true
+  xy: 2, 2
+  size: 141, 114
+  orig: 143, 117
+  offset: 0, 1
+  index: -1
+Chess/anim/gift_6
+  rotate: true
+  xy: 118, 13
+  size: 130, 95
+  orig: 131, 95
+  offset: 1, 0
+  index: -1

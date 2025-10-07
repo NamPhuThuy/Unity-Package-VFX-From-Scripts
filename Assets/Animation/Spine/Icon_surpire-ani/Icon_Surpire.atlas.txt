@@ -1,0 +1,13 @@
+
+Icon_Surpire.png
+size: 160,160
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+2
+  rotate: false
+  xy: 4, 4
+  size: 106, 149
+  orig: 106, 149
+  offset: 0, 0
+  index: -1

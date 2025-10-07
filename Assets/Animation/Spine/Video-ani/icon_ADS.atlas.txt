@@ -1,0 +1,20 @@
+
+icon_ADS.png
+size: 480,248
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Movie
+  rotate: false
+  xy: 4, 10
+  size: 281, 231
+  orig: 281, 231
+  offset: 0, 0
+  index: -1
+Thanh_Movie
+  rotate: true
+  xy: 289, 4
+  size: 237, 186
+  orig: 237, 186
+  offset: 0, 0
+  index: -1

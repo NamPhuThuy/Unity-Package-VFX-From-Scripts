@@ -1,0 +1,13 @@
+
+Bling_tile.png
+size: 56,56
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+as21
+  rotate: false
+  xy: 4, 4
+  size: 48, 47
+  orig: 48, 47
+  offset: 0, 0
+  index: -1

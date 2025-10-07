@@ -1,0 +1,34 @@
+
+Gift Box.png
+size: 1528,660
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Box_MS
+  rotate: true
+  xy: 4, 14
+  size: 640, 432
+  orig: 640, 432
+  offset: 0, 0
+  index: -1
+Box_MT
+  rotate: true
+  xy: 1149, 4
+  size: 650, 372
+  orig: 650, 372
+  offset: 0, 0
+  index: -1
+Lid_Box
+  rotate: false
+  xy: 440, 306
+  size: 705, 348
+  orig: 705, 348
+  offset: 0, 0
+  index: -1
+ribbon bow
+  rotate: false
+  xy: 440, 35
+  size: 586, 267
+  orig: 586, 267
+  offset: 0, 0
+  index: -1

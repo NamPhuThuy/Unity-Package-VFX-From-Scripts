@@ -1,0 +1,146 @@
+
+NoADS.png
+size: 1896,1896
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Bling_1
+  rotate: false
+  xy: 1351, 319
+  size: 82, 82
+  orig: 82, 82
+  offset: 0, 0
+  index: -1
+Bling_10
+  rotate: true
+  xy: 1220, 37
+  size: 83, 82
+  orig: 83, 82
+  offset: 0, 0
+  index: -1
+Bling_12
+  rotate: false
+  xy: 1265, 318
+  size: 82, 83
+  orig: 82, 83
+  offset: 0, 0
+  index: -1
+Bling_3
+  rotate: false
+  xy: 1048, 37
+  size: 82, 83
+  orig: 82, 83
+  offset: 0, 0
+  index: -1
+Bling_6
+  rotate: false
+  xy: 1134, 37
+  size: 82, 83
+  orig: 82, 83
+  offset: 0, 0
+  index: -1
+Bling_8
+  rotate: false
+  xy: 961, 37
+  size: 83, 83
+  orig: 83, 83
+  offset: 0, 0
+  index: -1
+Coin_1
+  rotate: true
+  xy: 1265, 405
+  size: 199, 140
+  orig: 199, 140
+  offset: 0, 0
+  index: -1
+Coin_2
+  rotate: true
+  xy: 1265, 608
+  size: 197, 165
+  orig: 197, 165
+  offset: 0, 0
+  index: -1
+Coin_3
+  rotate: false
+  xy: 1101, 809
+  size: 196, 166
+  orig: 196, 166
+  offset: 0, 0
+  index: -1
+Coin_4
+  rotate: false
+  xy: 1301, 834
+  size: 199, 141
+  orig: 199, 141
+  offset: 0, 0
+  index: -1
+Coin_5
+  rotate: true
+  xy: 1277, 158
+  size: 156, 138
+  orig: 156, 138
+  offset: 0, 0
+  index: -1
+Coin_6
+  rotate: false
+  xy: 796, 7
+  size: 161, 113
+  orig: 161, 113
+  offset: 0, 0
+  index: -1
+Coin_7
+  rotate: false
+  xy: 796, 7
+  size: 161, 113
+  orig: 161, 113
+  offset: 0, 0
+  index: -1
+Coin_8
+  rotate: false
+  xy: 796, 7
+  size: 161, 113
+  orig: 161, 113
+  offset: 0, 0
+  index: -1
+Hop_MS
+  rotate: false
+  xy: 796, 124
+  size: 477, 185
+  orig: 477, 185
+  offset: 0, 0
+  index: -1
+Hop_MT
+  rotate: true
+  xy: 1101, 979
+  size: 495, 337
+  orig: 495, 337
+  offset: 0, 0
+  index: -1
+Light
+  rotate: false
+  xy: 4, 4
+  size: 788, 789
+  orig: 788, 789
+  offset: 0, 0
+  index: -1
+Nap hop
+  rotate: true
+  xy: 1101, 1478
+  size: 412, 414
+  orig: 412, 414
+  offset: 0, 0
+  index: -1
+Sun_Light
+  rotate: false
+  xy: 4, 797
+  size: 1093, 1093
+  orig: 1093, 1093
+  offset: 0, 0
+  index: -1
+icon_NoADS
+  rotate: true
+  xy: 796, 313
+  size: 480, 465
+  orig: 480, 465
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,41 @@
+
+Icon_Lock.png
+size: 388,140
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Chain_1
+  rotate: false
+  xy: 4, 4
+  size: 132, 131
+  orig: 132, 131
+  offset: 0, 0
+  index: -1
+Chain_2
+  rotate: false
+  xy: 140, 4
+  size: 131, 131
+  orig: 131, 131
+  offset: 0, 0
+  index: -1
+Moc khoa_1
+  rotate: false
+  xy: 335, 75
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+o khoa_1
+  rotate: false
+  xy: 275, 75
+  size: 56, 60
+  orig: 56, 60
+  offset: 0, 0
+  index: -1
+o khoa_2
+  rotate: false
+  xy: 275, 11
+  size: 56, 60
+  orig: 56, 60
+  offset: 0, 0
+  index: -1
