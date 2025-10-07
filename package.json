@@ -2,7 +2,7 @@
     "name": "com.namphuthuy.vfxfromscripts",
     "version": "1.0.0",
     "displayName": "VFX From Scripts",
-    "description": "Bunch of vfx that use scripts.",
+    "description": "Bunch of VFXs that use C# scripts.",
     "unity": "6000.0",
     "categories": 
     [
@@ -20,7 +20,8 @@
     "dependencies": 
     {
         "com.unity.textmeshpro": "3.0.6",
-        "com.unity.ugui": "1.0.0"   
+        "com.unity.ugui": "1.0.0",
+        "com.namphuthuy.dotween": "1.2.785"
     },
     "author": 
     {
@@ -29,6 +30,6 @@
         "url": "https://github.com/NamPhuThuy"
     },
     "license": "MIT",
-    "changelogUrl": "https://github.com/NamPhuThuy/VFXFromScripts/blob/main/CHANGELOG.md",
-    "documentationUrl": "https://github.com/NamPhuThuy/VFXFromScripts/blob/main/README.md"
+    "changelogUrl": "https://github.com/NamPhuThuy/Unity-Package-VFX-From-Scripts/blob/main/changelog.md",
+    "documentationUrl": "https://github.com/NamPhuThuy/Unity-Package-VFX-From-Scripts"
 }
