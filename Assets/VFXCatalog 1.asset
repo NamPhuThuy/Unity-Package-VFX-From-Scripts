@@ -18,6 +18,6 @@ MonoBehaviour:
     preload: 3
     softMaxAliveSeconds: 10
   - type: 2
-    prefab: {fileID: 2963970471961178980, guid: 018b1cffccbd331459fac2413cc1a739, type: 3}
+    prefab: {fileID: 6670669583149072350, guid: 610e2a3ee3ffabc4fb89245daf5ca7ff, type: 3}
     preload: 3
     softMaxAliveSeconds: 10

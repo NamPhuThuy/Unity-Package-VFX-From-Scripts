@@ -7,7 +7,8 @@ namespace NamPhuThuy.VFX
     public struct VFXArguments
     {
         // common payload
-        public int amount;            // e.g., +250 coins
+        public int amount;           
+        public int prevAmount;           
         public string message;        // e.g., "+3 Moves"
         public Transform initialParent; // where to spawn (if needed)
         public Transform target;      // where to fly/attach
@@ -22,6 +23,7 @@ namespace NamPhuThuy.VFX
         // lifecycle callbacks (all optional)
         public System.Action onBegin;     // started playing
         public System.Action onArrive;    // e.g., reached target (good time to tick UI)
+        public System.Action onStepDone;
         public System.Action onComplete;  // finished/auto-released
 
         // helpers

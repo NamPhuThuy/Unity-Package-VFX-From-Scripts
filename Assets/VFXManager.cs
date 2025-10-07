@@ -139,6 +139,7 @@ namespace NamPhuThuy.VFX
         public VFXBase PlayAt(
             VFXType type = VFXType.NONE, 
             int amount = 0, 
+            int prevAmount = 0,
             string message = null, 
             Transform initialParent = null, 
             Transform target = null,
@@ -148,11 +149,13 @@ namespace NamPhuThuy.VFX
             float duration = 0,
             bool isLooping = false, 
             Color color = default,
-            System.Action onArrive = null, 
-            System.Action onComplete = null)
+            Action onArrive = null, 
+            Action onStepDone = null,
+            Action onComplete = null)
         {
             return Play(type, new VFXArguments {
                 amount = amount,
+                prevAmount = prevAmount,
                 message = message,
                 initialParent = initialParent,
                 target = target,
@@ -163,6 +166,7 @@ namespace NamPhuThuy.VFX
                 duration = duration,
                 color = color,
                 onArrive = onArrive,
+                onStepDone = onStepDone,
                 onComplete = onComplete
             });
         }
@@ -181,123 +185,6 @@ namespace NamPhuThuy.VFX
             remaningItems--;
 
             return remaningItems * unitValue;
-        }
-    }
-    
-    [CustomEditor(typeof(VFXManager))]
-    public class VFXManagerEditor : Editor
-    {
-        private VFXManager _script;
-        private Texture2D frogIcon;
-        
-        
-        private VFXType selectedVFXType = VFXType.NONE;
-        private Vector3 testPosition = Vector3.zero;
-        private int testAmount = 100;
-        private string testMessage = "Test Message";
-        private float testDuration = 2f;
-
-        private bool isUseVFXManagerPos = false;
-        private void OnEnable()
-        {
-            _script = (VFXManager)target;
-            frogIcon = Resources.Load<Texture2D>("frog");
-        }
-
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-            
-            if (!Application.isPlaying) return;
-
-            EditorGUILayout.Space(10);
-            EditorGUILayout.LabelField("VFX Testing", EditorStyles.boldLabel);
-
-            // VFX Type selection
-            selectedVFXType = (VFXType)EditorGUILayout.EnumPopup("VFX Type", selectedVFXType);
-
-            // Test parameters
-            testPosition = EditorGUILayout.Vector3Field("Position", testPosition);
-            testAmount = EditorGUILayout.IntField("Amount", testAmount);
-            testMessage = EditorGUILayout.TextField("Message", testMessage);
-            testDuration = EditorGUILayout.FloatField("Duration", testDuration);
-            isUseVFXManagerPos = EditorGUILayout.Toggle("Use VFXManager Position", isUseVFXManagerPos);
-
-            EditorGUILayout.Space(5);
-
-            // Test buttons
-            EditorGUILayout.BeginHorizontal();
-            
-            ButtonPlayCurrentVFX();
-            ButtonPlayAtCenterSceneView();
-            
-
-            EditorGUILayout.EndHorizontal();
-
-            // Quick test all VFX types
-            EditorGUILayout.Space(5);
-            if (GUILayout.Button("Test All VFX Types"))
-            {
-                TestAllVFXTypes(_script);
-            }
-        }
-
-        private void ButtonPlayCurrentVFX()
-        {
-            Vector3 posi = testPosition;
-            if (isUseVFXManagerPos) posi = _script.transform.position;
-            
-            if (GUILayout.Button(new GUIContent("Play VFX", frogIcon)))
-            {
-                _script.PlayAt(
-                    type: selectedVFXType,
-                    pos: posi,
-                    amount: testAmount,
-                    message: testMessage,
-                    duration: testDuration
-                );
-            }
-        }
-
-        private void ButtonPlayAtCenterSceneView()
-        {
-            if (GUILayout.Button(new GUIContent("Play at Scene View Center", frogIcon)))
-            {
-                var sceneView = SceneView.lastActiveSceneView;
-                if (sceneView != null)
-                {
-                    Vector3 centerPos = sceneView.camera.transform.position + sceneView.camera.transform.forward * 5f;
-                    _script.PlayAt(
-                        type: selectedVFXType,
-                        pos: centerPos,
-                        amount: testAmount,
-                        message: testMessage,
-                        duration: testDuration
-                    );
-                }
-            }
-        }
-
-        private void TestAllVFXTypes(VFXManager vfxManager)
-        {
-            var vfxTypes = System.Enum.GetValues(typeof(VFXType));
-            float spacing = 2f;
-            int index = 0;
-
-            foreach (VFXType vfxType in vfxTypes)
-            {
-                if (vfxType == VFXType.NONE) continue;
-
-                Vector3 pos = testPosition + Vector3.right * (index * spacing);
-                vfxManager.PlayAt(
-                    type: vfxType,
-                    pos: pos,
-                    amount: testAmount,
-                    message: $"{vfxType}",
-                    duration: testDuration
-                );
-                index++;
-            }
         }
     }
 }
