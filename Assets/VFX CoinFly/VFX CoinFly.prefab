@@ -55,6 +55,7 @@ MonoBehaviour:
   autoDisable: 1
   args:
     amount: 0
+    prevAmount: 0
     message: 
     initialParent: {fileID: 0}
     target: {fileID: 0}
@@ -65,20 +66,18 @@ MonoBehaviour:
     duration: 0
     color: {r: 0, g: 0, b: 0, a: 0}
   isPlaying: 0
-  resourceType: 0
-  fakeResourceText: {fileID: 6983340439759238326}
-  realResourceText: {fileID: 0}
-  poolSize: 8
   targetPosition: {x: 0, y: 0, z: 0}
   totalAmount: 0
+  prevValue: 0
   container: {fileID: 1106169261562559574}
-  currentVFXPrefab: {fileID: 6642060477465062923, guid: 61b2486888a4f6b498cf4b8b7dc25d8e, type: 3}
+  fakeResourceText: {fileID: 6983340439759238326}
+  realResourceText: {fileID: 0}
+  targetResourceImage: {fileID: 0}
   currentVFXSprite: {fileID: 6319756854316307725, guid: b8762e43125c6c5448e4f8feb8bf8e4c, type: 3}
+  currentIconPrefab: {fileID: 6642060477465062923, guid: 61b2486888a4f6b498cf4b8b7dc25d8e, type: 3}
+  iconList: []
   rippleFxCointainer: {fileID: 0}
   rippleFx: {fileID: 0}
-  _rewards: []
-  _rewardImages: []
-  _coinImage: {fileID: 0}
 --- !u!1 &7372924511118648083
 GameObject:
   m_ObjectHideFlags: 0

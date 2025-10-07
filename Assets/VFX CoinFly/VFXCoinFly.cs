@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using NamPhuThuy.Common;
 using NamPhuThuy.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace NamPhuThuy.VFX
 {
@@ -21,37 +24,44 @@ namespace NamPhuThuy.VFX
         private const float SIZE_RANDOM_MIN = 1.1f;
         private const float SIZE_RANDOM_MAX = 1.3f;
 
-        [SerializeField] private ResourceType resourceType;
-        [SerializeField] private TextMeshProUGUI fakeResourceText;
-        [SerializeField] private TextMeshProUGUI realResourceText;
 
         [Header("Stats")]
-        [SerializeField] private int poolSize;
+        
         [SerializeField] private Vector3 targetPosition;
         [SerializeField] private int totalAmount;
         [SerializeField] private int prevValue;
 
         [Header("Components")]
         [SerializeField] private GameObject container;
+        [SerializeField] private TextMeshProUGUI fakeResourceText;
+        [SerializeField] private TextMeshProUGUI realResourceText;
+        [SerializeField] private Transform targetResourceImage;
 
         [Header("VFX")]
-        [SerializeField] private GameObject currentVFXPrefab;
         [SerializeField] private Sprite currentVFXSprite;
+        [SerializeField] private GameObject currentIconPrefab;
+        [SerializeField] private RectTransform[] iconList;
+       
         [SerializeField] private RectTransform rippleFxCointainer;
         [SerializeField] private ParticleSystem rippleFx;
-
-        [SerializeField] private RectTransform[] _rewards;
-        [SerializeField] private Image[] _rewardImages;
-        [SerializeField] private Transform _coinImage;
-        private Vector2 _coinImageSize;
-        private SpawnedRewardItemsData _spawnedRewardItemsData;
+       
         private Tweener _shakeFakeResourceTextTween;
+
+        #region Private Fields
+
+        private readonly int _poolSize = 8;
+        private int _unitValue;
+        private int _remainingItems;
+
+        private Transform _initTextParent;
+        #endregion
 
         #region MonoBehaviour Callbacks
 
         private void Awake()
         {
             CreatePool();
+            _initTextParent = fakeResourceText.transform.parent;
         }
 
         #endregion
@@ -69,27 +79,28 @@ namespace NamPhuThuy.VFX
 
         private void SetValues()
         {
-            realResourceText = args.target.GetComponent<TextMeshProUGUI>();
+            realResourceText = args.targetTransform.GetComponent<TextMeshProUGUI>();
+            targetPosition = args.interactTransform.position;
+            
             totalAmount = args.amount;
             prevValue = args.prevAmount;
+
+            _remainingItems = _poolSize;
+            _unitValue = totalAmount / _poolSize;
         }
         
         private void CreatePool()
         {
-            _rewards = new RectTransform[poolSize];
-            _rewardImages = new Image[poolSize];
+            iconList = new RectTransform[_poolSize];
 
-            for (int i = 0; i < poolSize; i++)
+            for (int i = 0; i < _poolSize; i++)
             {
-                var reward = Instantiate(currentVFXPrefab, args.worldPos, Quaternion.identity).GetComponent<RectTransform>();
-                reward.SetParent(container.transform, true);
-                
-                var image = reward.GetComponent<Image>();
-                image.SetNativeSize();
+                var icon = Instantiate(currentIconPrefab, args.worldPos, Quaternion.identity).GetComponent<RectTransform>();
+                icon.SetParent(container.transform, true);
+                icon.GetComponent<Image>().SetNativeSize();
 
-                _rewards[i] = reward;
-                _rewardImages[i] = image;
-                reward.gameObject.SetActive(false);
+                iconList[i] = icon;
+                icon.gameObject.SetActive(false);
             }
         }
 
@@ -100,50 +111,40 @@ namespace NamPhuThuy.VFX
             int itemSizeX = currentVFXSprite.texture.width;
             bool isAllCoinSpawned = false;
 
-            for (int i = 0; i < poolSize; i++)
+            for (int i = 0; i < _poolSize; i++)
             {
-                SetupRewardItem(i, itemSizeX, () => isAllCoinSpawned = true, i == poolSize - 1);
+                SetupRewardItem(i, itemSizeX, () => isAllCoinSpawned = true, i == _poolSize - 1);
             }
 
             while (!isAllCoinSpawned)
                 yield return YieldHelper.Get(1f / 30);
 
-            float remainValue = totalAmount % poolSize;
-            float unitValue = (totalAmount - remainValue) / poolSize;
-
-            _spawnedRewardItemsData = new SpawnedRewardItemsData
-            {
-                totalItems = poolSize,
-                remaningItems = poolSize,
-                unitValue = unitValue
-            };
-
             AutoFindResourceDisplay();
 
             realResourceText.gameObject.SetActive(false);
             fakeResourceText.gameObject.SetActive(true);
-            fakeResourceText.text = "0";
+            fakeResourceText.text = prevValue.ToString();
 
             var curvePoints = GenerateCurvePoints();
 
-            for (int i = 0; i < poolSize; i++)
+            for (int i = 0; i < _poolSize; i++)
             {
-                AnimateRewardItem(i, curvePoints, unitValue);
+                AnimateRewardItem(i, curvePoints);
             }
         }
 
         // Change SetupRewardItem signature:
         private void SetupRewardItem(int index, int itemSizeX, System.Action onLastItem, bool isLast)
         {
-            var reward = _rewards[index];
-            var image = _rewardImages[index];
+            int randomSizeX = (int)(Random.Range(SIZE_RANDOM_MIN, SIZE_RANDOM_MAX) * itemSizeX);
+            var reward = iconList[index];
+            Image image = reward.GetComponent<Image>();
 
             reward.gameObject.SetActive(true);
-            int randomSizeX = (int)(Random.Range(SIZE_RANDOM_MIN, SIZE_RANDOM_MAX) * itemSizeX);
             image.SetSizeKeepRatioY(randomSizeX);
-
             image.sprite = currentVFXSprite;
             image.color = Color.white;
+            
             reward.localPosition = new Vector3(Random.Range(-2 * itemSizeX, 2 * itemSizeX), Random.Range(-2 * itemSizeX, 2 * itemSizeX));
             reward.localScale = Vector3.zero;
 
@@ -158,9 +159,9 @@ namespace NamPhuThuy.VFX
             }));
         }
 
-        private void AnimateRewardItem(int index, Vector2[] curvePoints, float unitValue)
+        private void AnimateRewardItem(int index, Vector2[] curvePoints)
         {
-            var reward = _rewards[index];
+            var reward = iconList[index];
             var startPosition = reward.transform.position;
             var distance = targetPosition - startPosition;
 
@@ -174,9 +175,9 @@ namespace NamPhuThuy.VFX
             seq.Append(reward.transform.DOLocalMove(randomBouncePosition, 0.3f).SetDelay(SPAWN_DELAY * index + INITIAL_DELAY).SetEase(Ease.InOutSine));
             seq.Append(reward.transform.DOPath(path, 0.4f, PathType.CatmullRom).SetEase(Ease.InOutSine).OnComplete(() =>
             {
-                _spawnedRewardItemsData.remaningItems--;
+                _remainingItems--;
 
-                if (_spawnedRewardItemsData.remaningItems <= 0)
+                if (_remainingItems <= 0)
                 {
                     realResourceText.gameObject.SetActive(true);
                     fakeResourceText.gameObject.SetActive(false);
@@ -204,7 +205,7 @@ namespace NamPhuThuy.VFX
                 // _shakeFakeResourceTextTween = _coinImage.DOPunchScale(0.15f * Vector3.one, 0.3f);
             }
 
-            fakeResourceText.text = $"{prevValue + totalAmount - _spawnedRewardItemsData.remaningItems * _spawnedRewardItemsData.unitValue}";
+            fakeResourceText.text = $"{prevValue + totalAmount - _remainingItems * _unitValue}";
         }
 
         private Vector2[] GenerateCurvePoints()
@@ -229,17 +230,14 @@ namespace NamPhuThuy.VFX
         {
             if (realResourceText == null) return;
 
-            targetPosition = realResourceText.transform.position;
-            _coinImageSize = realResourceText.rectTransform.sizeDelta;
-    
-            // Copy text style from real to fake text
-            fakeResourceText.CopyProperties(realResourceText);
-            fakeResourceText.transform.SetParent(realResourceText.transform.parent, true);
-            fakeResourceText.transform.position = realResourceText.transform.position;
             
-            /*fakeResourceText.fontSize = realResourceText.fontSize;
-            fakeResourceText.font = realResourceText.font;
-            fakeResourceText.color = realResourceText.color;*/
+    
+            fakeResourceText.CopyProperties(realResourceText);
+            fakeResourceText.transform.SetParent(realResourceText.transform.parent);
+            // fakeResourceText.transform.position = realResourceText.transform.position;
+            fakeResourceText.rectTransform.localPosition = realResourceText.rectTransform.localPosition;
+            fakeResourceText.rectTransform.sizeDelta = realResourceText.rectTransform.sizeDelta;
+            fakeResourceText.transform.localScale = realResourceText.transform.localScale;
         }
     }
 }

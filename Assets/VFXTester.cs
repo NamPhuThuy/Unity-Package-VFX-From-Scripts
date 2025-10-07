@@ -4,6 +4,7 @@ Github: https://github.com/NamPhuThuy
 
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -17,7 +18,8 @@ namespace NamPhuThuy.VFX
         
         [Header("RESOURCES FLY")]
         public TextMeshProUGUI coinText;
-
+        public Image coinImage;
+        
         #endregion
 
         #region Private Fields
@@ -158,7 +160,8 @@ namespace NamPhuThuy.VFX
                 VFXManager.Ins.PlayAt(
                     type: VFXType.COIN_FLY,
                     target: _script.coinText.transform,
-                    pos: VFXManager.Ins.GetComponent<RectTransform>().anchoredPosition,
+                    interactTransform: _script.coinImage.transform,
+                    pos: VFXManager.Ins.transform.position,
                     amount: testAmount,
                     message: testMessage,
                     duration: testDuration

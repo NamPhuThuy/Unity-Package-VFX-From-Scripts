@@ -107,10 +107,10 @@ namespace NamPhuThuy.VFX
         private void SetupConfigFromArgs()
         {
             // Use target transform if provided
-            if (args.target != null)
+            if (args.targetTransform != null)
             {
-                _currentConfig.targetTransform = args.target;
-                _currentConfig.targetPos = args.target.position;
+                _currentConfig.targetTransform = args.targetTransform;
+                _currentConfig.targetPos = args.targetTransform.position;
             }
 
             // Set amount if provided
@@ -393,7 +393,7 @@ namespace NamPhuThuy.VFX
             var vfxArgs = new VFXArguments
             {
                 amount = config.endValue - config.startValue,
-                target = config.targetTransform,
+                targetTransform = config.targetTransform,
                 worldPos = config.targetPos
             };
             

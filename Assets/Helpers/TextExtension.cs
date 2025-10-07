@@ -62,7 +62,7 @@ namespace NamPhuThuy.VFX
             target.margin = source.margin;
             target.extraPadding = source.extraPadding;
             target.isOrthographic = source.isOrthographic;
-            target.enableKerning = source.enableKerning;
+            target.fontFeatures = source.fontFeatures;
 
             // Effects
             target.enableCulling = source.enableCulling;

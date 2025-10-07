@@ -38,6 +38,10 @@ namespace NamPhuThuy.VFX
         {
             base.Awake();
             PreloadAll();
+            
+            DebugLogger.LogSimple(message:$"anchored posi: {GetComponent<RectTransform>().anchoredPosition}");
+            DebugLogger.LogSimple(message:$"rect position: {GetComponent<RectTransform>().position}");
+            DebugLogger.LogSimple(message:$"transform position: {transform.position}");
         }
 
         void Update()
@@ -122,10 +126,10 @@ namespace NamPhuThuy.VFX
             {
                 v.transform.SetPositionAndRotation(args.worldPos, args.worldRot);
             }
-            else if (args.target)
+            else if (args.targetTransform)
             {
-                v.transform.position = args.target.position; 
-                v.transform.rotation = args.target.rotation;
+                v.transform.position = args.targetTransform.position; 
+                v.transform.rotation = args.targetTransform.rotation;
             }
             else
             {
@@ -143,6 +147,7 @@ namespace NamPhuThuy.VFX
             string message = null, 
             Transform initialParent = null, 
             Transform target = null,
+            Transform interactTransform = null,
             Vector3 pos = default,
             Vector3 offset = default,
             Quaternion rot = default,
@@ -158,7 +163,8 @@ namespace NamPhuThuy.VFX
                 prevAmount = prevAmount,
                 message = message,
                 initialParent = initialParent,
-                target = target,
+                targetTransform = target,
+                interactTransform = interactTransform,
                 worldPos = pos,
                 offset = offset,
                 worldRot = rot,
@@ -174,19 +180,6 @@ namespace NamPhuThuy.VFX
         #endregion
     }
 
-    public class SpawnedRewardItemsData
-    {
-        public int totalItems;
-        public int remaningItems;
-        public float unitValue;
-
-        public float GetValueLeft()
-        {
-            remaningItems--;
-
-            return remaningItems * unitValue;
-        }
-    }
 }
 
 /*

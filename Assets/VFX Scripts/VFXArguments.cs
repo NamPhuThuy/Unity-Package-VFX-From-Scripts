@@ -11,7 +11,8 @@ namespace NamPhuThuy.VFX
         public int prevAmount;           
         public string message;        // e.g., "+3 Moves"
         public Transform initialParent; // where to spawn (if needed)
-        public Transform target;      // where to fly/attach
+        public Transform targetTransform;      // where to fly/attach
+        public Transform interactTransform;
         public Vector3 worldPos;      
         public Vector3 offset;
         public Quaternion worldRot;   // spawn rotation (optional)
