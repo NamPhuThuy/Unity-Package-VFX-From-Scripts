@@ -13,6 +13,8 @@ namespace NamPhuThuy.VFX
         public Transform initialParent; // where to spawn (if needed)
         public Transform targetTransform;      // where to fly/attach
         public Transform interactTransform;
+        public Transform[] transforms;
+        public Sprite sprite;
         public Vector3 worldPos;      
         public Vector3 offset;
         public Quaternion worldRot;   // spawn rotation (optional)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,10 +11,25 @@ namespace NamPhuThuy.VFX
     public class VFXBreakTileParticle : VFXBase
     {
         [SerializeField] private ParticleSystem effectParticle;
+
+        #region MonoBehaviour Callbacks
+
+        private void Awake()
+        {
+            args.onBegin += SetValues;
+        }
+
+        #endregion
+        
+        private void SetValues()
+        {
+            transform.parent = args.initialParent;
+        }
+        
         protected override void OnPlay()
         {
             // Debug.Log($"VFXBreakTileParticle.OnPlay()");
-            transform.parent = args.initialParent;
+            
             // transform.localPosition = args.worldPos;
 
             // Vector3 currentEuler = transform.localRotation.eulerAngles;

@@ -62,6 +62,7 @@ namespace NamPhuThuy.VFX
         {
             CreatePool();
             _initTextParent = fakeResourceText.transform.parent;
+            // args.onBegin += SetValues;
         }
 
         #endregion
@@ -125,10 +126,9 @@ namespace NamPhuThuy.VFX
             fakeResourceText.gameObject.SetActive(true);
             fakeResourceText.text = prevValue.ToString();
 
-            var curvePoints = GenerateCurvePoints();
-
             for (int i = 0; i < _poolSize; i++)
             {
+                var curvePoints = GenerateCurvePoints(i);
                 AnimateRewardItem(i, curvePoints);
             }
         }
@@ -208,13 +208,55 @@ namespace NamPhuThuy.VFX
             fakeResourceText.text = $"{prevValue + totalAmount - _remainingItems * _unitValue}";
         }
 
-        private Vector2[] GenerateCurvePoints()
+        private enum CurveType
         {
-            var points = new Vector2[CURVE_POINT_COUNT];
+            Exponential,
+            Sine,
+            Parabolic,
+            Linear
+        }
+        
+        private Vector2[] GenerateCurvePoints(int coinIndex)
+        {
+            /*var points = new Vector2[CURVE_POINT_COUNT];
             for (int j = 0; j < CURVE_POINT_COUNT; j++)
             {
                 float x = (float)j / (CURVE_POINT_COUNT - 1);
                 float y = EvaluateSaturationCurve(x, CURVE_STRENGTH);
+                points[j] = new Vector2(x, y);
+            }
+            return points;*/
+            
+            var points = new Vector2[CURVE_POINT_COUNT];
+    
+            // Create different curve types based on coin index
+            CurveType curveType = (CurveType)(coinIndex % 4);
+    
+            for (int j = 0; j < CURVE_POINT_COUNT; j++)
+            {
+                float x = (float)j / (CURVE_POINT_COUNT - 1);
+                float y = 0f;
+        
+                switch (curveType)
+                {
+                    case CurveType.Exponential:
+                        y = EvaluateSaturationCurve(x, CURVE_STRENGTH);
+                        break;
+                    case CurveType.Sine:
+                        y = Mathf.Sin(x * Mathf.PI * 0.5f) * 1.2f; // Arc shape
+                        break;
+                    case CurveType.Parabolic:
+                        y = x * x * 1.5f; // Steeper at end
+                        break;
+                    case CurveType.Linear:
+                        y = x; // Straight line
+                        break;
+                }
+        
+                // Add some randomness to each point
+                float randomOffset = Random.Range(-0.1f, 0.1f);
+                y = Mathf.Clamp01(y + randomOffset);
+        
                 points[j] = new Vector2(x, y);
             }
             return points;
@@ -229,12 +271,9 @@ namespace NamPhuThuy.VFX
         private void AutoFindResourceDisplay()
         {
             if (realResourceText == null) return;
-
-            
     
             fakeResourceText.CopyProperties(realResourceText);
             fakeResourceText.transform.SetParent(realResourceText.transform.parent);
-            // fakeResourceText.transform.position = realResourceText.transform.position;
             fakeResourceText.rectTransform.localPosition = realResourceText.rectTransform.localPosition;
             fakeResourceText.rectTransform.sizeDelta = realResourceText.rectTransform.sizeDelta;
             fakeResourceText.transform.localScale = realResourceText.transform.localScale;
