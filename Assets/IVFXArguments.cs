@@ -2,10 +2,38 @@
 Github: https://github.com/NamPhuThuy
 */
 
+using UnityEngine;
+
 namespace NamPhuThuy.VFX
 {
     public interface IVFXArguments
     {
-        VFXType VFXType { get; }
+        VFXType Type { get; }
+        
+       
+    }
+    
+    public struct CoinFlyArgs : IVFXArguments
+    {
+        public VFXType Type => VFXType.COIN_FLY;
+        
+        public int amount;
+        public int prevAmount;
+        public Transform target;
+        public Transform interactTarget;
+        public Vector3 startPosition;
+        public System.Action onArrive;
+        public System.Action onComplete;
+    }
+    
+    public struct PopupTextArgs : IVFXArguments
+    {
+        public VFXType Type => VFXType.POPUP_TEXT;
+        
+        public string message;
+        public Vector3 worldPos;
+        public Color color;
+        public float duration;
+        public System.Action onComplete;
     }
 }

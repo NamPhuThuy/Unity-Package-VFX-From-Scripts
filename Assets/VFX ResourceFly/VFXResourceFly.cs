@@ -103,7 +103,17 @@ namespace NamPhuThuy.VFX
             // Start the resource fly animation
             StartCoroutine(TriggerResourceFlyAnimation());
         }
-        
+
+        public override void Play<T>(T args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Play(object args)
+        {
+            throw new NotImplementedException();
+        }
+
         private void SetupConfigFromArgs()
         {
             // Use target transform if provided

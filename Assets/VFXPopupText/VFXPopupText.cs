@@ -123,6 +123,20 @@ namespace NamPhuThuy.VFX
             });
         }
 
+        #region Override Methods
+        
+        public override void Play<T>(T args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Play(object args)
+        {
+            throw new NotImplementedException();
+        }
+        
+        #endregion
+
         #region Private Methods
 
         private void SetRandomColor()

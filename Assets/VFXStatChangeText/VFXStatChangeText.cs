@@ -141,7 +141,19 @@ namespace NamPhuThuy.VFX
             });
         }
 
+        #region Override Methods
+        
+        public override void Play<T>(T args)
+        {
+            throw new NotImplementedException();
+        }
 
+        public override void Play(object args)
+        {
+            throw new NotImplementedException();
+        }
+        
+        #endregion
     }
 
     #if UNITY_EDITOR

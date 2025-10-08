@@ -45,6 +45,12 @@ namespace NamPhuThuy.VFX
         #endregion
 
         #region Public Methods
+        
+        // Generic play method that each VFX implements
+        public abstract void Play<T>(T args) where T : struct, IVFXArguments;
+    
+        // Or use object if you prefer runtime type checking
+        public abstract void Play(object args);
 
         public void Play(VFXArguments _args)
         {

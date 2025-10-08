@@ -157,7 +157,7 @@ namespace NamPhuThuy.VFX
         {
             if (GUILayout.Button(new GUIContent("Play VFX Coin Fly", frogIcon)))
             {
-                VFXManager.Ins.PlayAt(
+                /*VFXManager.Ins.PlayAt(
                     type: VFXType.COIN_FLY,
                     target: _script.coinText.transform,
                     interactTransform: _script.coinImage.transform,
@@ -165,6 +165,20 @@ namespace NamPhuThuy.VFX
                     amount: testAmount,
                     message: testMessage,
                     duration: testDuration
+                );*/
+                
+                // NEW
+                var coinPanel = _script.coinImage.transform;
+                var coinText = _script.coinText.transform;
+
+                VFXManager.Ins.PlayCoinFly(
+                    amount: testAmount,
+                    prevAmount: 0,
+                    target: coinText.transform,
+                    startPos: VFXManager.Ins.transform.position,
+                    interactTarget: coinPanel.transform, // For positioning the target
+                    onArrive: () => Debug.Log("Coins arrived!"),
+                    onComplete: () => Debug.Log("Animation complete!")
                 );
             }
         }

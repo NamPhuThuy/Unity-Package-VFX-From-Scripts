@@ -112,6 +112,26 @@ namespace NamPhuThuy.VFX
             vfx.gameObject.SetActive(false);
             _pool[type].Enqueue(vfx);
         }
+
+        #region Private Methods
+        
+        private void PositionVFX<T>(VFXBase vfx, T args) where T : struct, IVFXArguments
+        {
+            // Use pattern matching or switch on Type for positioning logic
+            switch (args.Type)
+            {
+                case VFXType.COIN_FLY when args is CoinFlyArgs coinArgs:
+                    vfx.transform.position = coinArgs.startPosition;
+                    break;
+                case VFXType.POPUP_TEXT when args is PopupTextArgs popupArgs:
+                    vfx.transform.position = popupArgs.worldPos;
+                    break;
+                // ... other cases
+            }
+        }
+        
+
+        #endregion
         
 
         #region Public Methods
@@ -139,6 +159,21 @@ namespace NamPhuThuy.VFX
             v.Play(args);
             return v;
         }
+        
+        public T Play<T>(T args) where T : struct, IVFXArguments
+        {
+            var vfx = Get(args.Type);
+            if (!vfx) return args;
+
+            // Position the VFX based on argument type
+            PositionVFX(vfx, args);
+        
+            // Play with type-safe arguments
+            vfx.Play(args);
+            return args;
+        }
+        
+        
 
         public VFXBase PlayAt(
             VFXType type = VFXType.NONE, 
@@ -174,6 +209,43 @@ namespace NamPhuThuy.VFX
                 onArrive = onArrive,
                 onStepDone = onStepDone,
                 onComplete = onComplete
+            });
+        }
+
+        #endregion
+
+        #region Specific VFX Helpers
+
+        // Specific helper methods for common cases
+        public CoinFlyArgs PlayCoinFly(int amount, int prevAmount, Transform target, Vector3 startPos, Transform interactTarget = null, System.Action onArrive = null, System.Action onComplete = null)
+        {
+            var args = new CoinFlyArgs
+            {
+                amount = amount,
+                prevAmount = prevAmount,
+                target = target,
+                interactTarget = interactTarget,
+                startPosition = startPos,
+                onArrive = onArrive,
+                onComplete = onComplete
+            };
+
+            var vfx = Get(VFXType.COIN_FLY);
+            if (vfx != null)
+            {
+                vfx.Play(args);
+            }
+
+            return args;
+        }
+
+        public PopupTextArgs PlayPopupText(string message, Vector3 worldPos, Color color = default)
+        {
+            return Play(new PopupTextArgs
+            {
+                message = message,
+                worldPos = worldPos,
+                color = color == default ? Color.white : color
             });
         }
 

@@ -52,7 +52,9 @@ namespace NamPhuThuy.VFX
         private readonly int _poolSize = 8;
         private int _unitValue;
         private int _remainingItems;
-
+        private CoinFlyArgs _currentArgs;
+        
+        
         private Transform _initTextParent;
         #endregion
 
@@ -74,20 +76,56 @@ namespace NamPhuThuy.VFX
             StartCoroutine(TriggerCollectAnim());
         }
 
+        #region Override Methods
+
+        public override void Play<T>(T args)
+        {
+            if (args is CoinFlyArgs coinArgs)
+            {
+                PlayCoinFly(coinArgs);
+            }
+        }
         
+        private void PlayCoinFly(CoinFlyArgs coinArgs)
+        {
+            _currentArgs = coinArgs;
+            gameObject.SetActive(true);
+            SetValues();
+            KillTweens();
+            StartCoroutine(TriggerCollectAnim());
+        }
+
+        public override void Play(object args)
+        {
+            throw new NotImplementedException();
+        }
+        
+
+        #endregion
 
         #region Set up
 
         private void SetValues()
         {
-            realResourceText = args.targetTransform.GetComponent<TextMeshProUGUI>();
+            /*realResourceText = args.targetTransform.GetComponent<TextMeshProUGUI>();
             targetPosition = args.interactTransform.position;
             
             totalAmount = args.amount;
             prevValue = args.prevAmount;
 
             _remainingItems = _poolSize;
+            _unitValue = totalAmount / _poolSize;*/
+            
+            // NEW
+            realResourceText = _currentArgs.target.GetComponent<TextMeshProUGUI>();
+            targetPosition = _currentArgs.interactTarget ? _currentArgs.interactTarget.position : _currentArgs.target.position;
+        
+            totalAmount = _currentArgs.amount;
+            prevValue = _currentArgs.prevAmount;
+
+            _remainingItems = _poolSize;
             _unitValue = totalAmount / _poolSize;
+            transform.position = _currentArgs.startPosition;
         }
         
         private void CreatePool()
@@ -183,6 +221,10 @@ namespace NamPhuThuy.VFX
                     fakeResourceText.gameObject.SetActive(false);
                     fakeResourceText.transform.SetParent(transform);
                     realResourceText.text = $"{prevValue + totalAmount}";
+                    
+                    // NEW
+                    _currentArgs.onArrive?.Invoke();
+                    _currentArgs.onComplete?.Invoke();
                 }
                 else
                 {
