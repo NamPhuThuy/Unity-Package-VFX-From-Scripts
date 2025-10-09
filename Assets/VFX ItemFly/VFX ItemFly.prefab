@@ -53,21 +53,6 @@ MonoBehaviour:
   showDuration: 0.25
   lifeTime: 4
   autoDisable: 1
-  args:
-    amount: 0
-    prevAmount: 0
-    message: 
-    initialParent: {fileID: 0}
-    targetTransform: {fileID: 0}
-    interactTransform: {fileID: 0}
-    transforms: []
-    sprite: {fileID: 0}
-    worldPos: {x: 0, y: 0, z: 0}
-    offset: {x: 0, y: 0, z: 0}
-    worldRot: {x: 0, y: 0, z: 0, w: 0}
-    isLooping: 0
-    duration: 0
-    color: {r: 0, g: 0, b: 0, a: 0}
   isPlaying: 0
   targetPosition: {x: 0, y: 0, z: 0}
   totalAmount: 0
@@ -76,7 +61,7 @@ MonoBehaviour:
   fakeResourceText: {fileID: 6983340439759238326}
   realResourceText: {fileID: 0}
   targetInteractTransform: {fileID: 0}
-  itemSprite: {fileID: 6319756854316307725, guid: b8762e43125c6c5448e4f8feb8bf8e4c, type: 3}
+  itemSprite: {fileID: 21300000, guid: b8762e43125c6c5448e4f8feb8bf8e4c, type: 3}
   itemPrefab: {fileID: 6642060477465062923, guid: 61b2486888a4f6b498cf4b8b7dc25d8e, type: 3}
   iconList: []
   rippleFxCointainer: {fileID: 0}
