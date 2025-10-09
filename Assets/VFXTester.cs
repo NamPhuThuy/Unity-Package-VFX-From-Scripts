@@ -110,7 +110,7 @@ namespace NamPhuThuy.VFX
             
             ButtonPlayPopupText();
             ButtonPlayCoinFly();
-
+            ButtonStatChange();
             // Quick test all VFX types
             EditorGUILayout.Space(5);
             if (GUILayout.Button("Test All VFX Types"))
@@ -143,14 +143,14 @@ namespace NamPhuThuy.VFX
         {
             if (GUILayout.Button(new GUIContent("Play VFX Popup Text", frogIcon)))
             {
-                var popupArgs = new PopupTextArgs {
+                var args = new PopupTextArgs {
                     message = "Hello!",
                     worldPos = managerAnchoredPos,
                     color = Color.white,
                     duration = 1f,
                     onComplete = null
                 };
-                VFXManager.Ins.Play<PopupTextArgs>(popupArgs);
+                VFXManager.Ins.Play<PopupTextArgs>(args);
             }
         }
 
@@ -161,7 +161,7 @@ namespace NamPhuThuy.VFX
                 var coinPanel = _script.coinImage.transform;
                 var coinText = _script.coinText.transform;
                 
-                var itemFlyArgs = new ItemFlyArgs {
+                var args = new ItemFlyArgs {
                     amount = testAmount,
                     prevAmount = 0,
                     target = coinText.transform,
@@ -171,9 +171,31 @@ namespace NamPhuThuy.VFX
                     onComplete = () => Debug.Log("Animation complete!")
                 };
                 
-                VFXManager.Ins.Play<ItemFlyArgs>(itemFlyArgs);
+                VFXManager.Ins.Play<ItemFlyArgs>(args);
             }
         }
+        
+        private void ButtonStatChange()
+        {
+            if (GUILayout.Button(new GUIContent("Play State Change Text", frogIcon)))
+            {
+                var coinPanel = _script.coinImage.transform;
+                var coinText = _script.coinText.transform;
+                
+                var args = new StatChangeTextArgs {
+                    amount = 5,
+                    color = Color.yellow,
+                    offset = Vector2.zero,
+                    moveDistance = new Vector2(0f, 30f),
+                    initialParent = coinText,
+                    onComplete = null
+                };
+                
+                VFXManager.Ins.Play(args);
+            }
+        }
+
+
 
         #endregion
         

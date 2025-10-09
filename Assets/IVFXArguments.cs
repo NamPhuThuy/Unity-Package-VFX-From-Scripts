@@ -39,5 +39,16 @@ namespace NamPhuThuy.VFX
         public System.Action onComplete;
     }
     
+    public struct StatChangeTextArgs : IVFXArguments
+    {
+        public VFXType Type => VFXType.STAT_CHANGE_TEXT;
+        public float amount;
+        public Color color;
+        public Vector2 offset;
+        public Vector2 moveDistance;
+        public Transform initialParent;
+        public System.Action onComplete;
+    }
+    
     
 }
