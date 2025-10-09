@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 
 namespace NamPhuThuy.VFX
 {
-    public class VFXCoinFly : VFXBase
+    public class VFXItemFly : VFXBase
     {
         private const int CURVE_POINT_COUNT = 5;
         private const float CURVE_STRENGTH = 8f;
@@ -32,7 +32,7 @@ namespace NamPhuThuy.VFX
         [SerializeField] private int prevValue;
 
         [Header("Components")]
-        [SerializeField] private GameObject container;
+        [SerializeField] private GameObject itemContainer;
         [SerializeField] private TextMeshProUGUI fakeResourceText;
         [SerializeField] private TextMeshProUGUI realResourceText;
         [SerializeField] private Transform targetInteractTransform;
@@ -52,7 +52,7 @@ namespace NamPhuThuy.VFX
         private readonly int _poolSize = 8;
         private int _unitValue;
         private int _remainingItems;
-        private CoinFlyArgs _currentArgs;
+        private ItemFlyArgs _currentArgs;
         
         
         private Transform _initTextParent;
@@ -64,7 +64,6 @@ namespace NamPhuThuy.VFX
         {
             CreatePool();
             _initTextParent = fakeResourceText.transform.parent;
-            // args.onBegin += SetValues;
         }
 
         #endregion
@@ -77,7 +76,7 @@ namespace NamPhuThuy.VFX
 
         public override void Play<T>(T args)
         {
-            if (args is CoinFlyArgs coinArgs)
+            if (args is ItemFlyArgs coinArgs)
             {
                 _currentArgs = coinArgs;
                 gameObject.SetActive(true);
@@ -120,12 +119,12 @@ namespace NamPhuThuy.VFX
 
             for (int i = 0; i < _poolSize; i++)
             {
-                var icon = Instantiate(itemPrefab, args.worldPos, Quaternion.identity).GetComponent<RectTransform>();
-                icon.SetParent(container.transform, true);
-                icon.GetComponent<Image>().SetNativeSize();
+                var item = Instantiate(itemPrefab, args.worldPos, Quaternion.identity).GetComponent<RectTransform>();
+                item.SetParent(itemContainer.transform, true);
+                item.GetComponent<Image>().SetNativeSize();
 
-                iconList[i] = icon;
-                icon.gameObject.SetActive(false);
+                iconList[i] = item;
+                item.gameObject.SetActive(false);
             }
         }
 

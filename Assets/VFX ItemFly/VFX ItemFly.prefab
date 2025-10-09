@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6742332825487428674}
   - component: {fileID: 6670669583149072350}
   m_Layer: 5
-  m_Name: VFX CoinFly
+  m_Name: VFX ItemFly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,10 @@ MonoBehaviour:
     prevAmount: 0
     message: 
     initialParent: {fileID: 0}
-    target: {fileID: 0}
+    targetTransform: {fileID: 0}
+    interactTransform: {fileID: 0}
+    transforms: []
+    sprite: {fileID: 0}
     worldPos: {x: 0, y: 0, z: 0}
     offset: {x: 0, y: 0, z: 0}
     worldRot: {x: 0, y: 0, z: 0, w: 0}
@@ -69,12 +72,12 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   totalAmount: 0
   prevValue: 0
-  container: {fileID: 1106169261562559574}
+  itemContainer: {fileID: 1106169261562559574}
   fakeResourceText: {fileID: 6983340439759238326}
   realResourceText: {fileID: 0}
-  targetResourceImage: {fileID: 0}
-  currentVFXSprite: {fileID: 6319756854316307725, guid: b8762e43125c6c5448e4f8feb8bf8e4c, type: 3}
-  currentIconPrefab: {fileID: 6642060477465062923, guid: 61b2486888a4f6b498cf4b8b7dc25d8e, type: 3}
+  targetInteractTransform: {fileID: 0}
+  itemSprite: {fileID: 6319756854316307725, guid: b8762e43125c6c5448e4f8feb8bf8e4c, type: 3}
+  itemPrefab: {fileID: 6642060477465062923, guid: 61b2486888a4f6b498cf4b8b7dc25d8e, type: 3}
   iconList: []
   rippleFxCointainer: {fileID: 0}
   rippleFx: {fileID: 0}
@@ -90,7 +93,7 @@ GameObject:
   - component: {fileID: 313306177499634221}
   - component: {fileID: 6983340439759238326}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text Fake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

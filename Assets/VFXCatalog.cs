@@ -8,7 +8,7 @@ namespace NamPhuThuy.VFX
     {
         NONE = 0,
         POPUP_TEXT = 1,
-        COIN_FLY = 2,
+        ITEM_FLY = 2,
         BREAK_TILE = 3,
         CONFETTI = 4,
         BREAK_TILE_PARTICLE = 5,

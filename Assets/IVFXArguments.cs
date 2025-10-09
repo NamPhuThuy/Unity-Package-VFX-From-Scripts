@@ -14,9 +14,9 @@ namespace NamPhuThuy.VFX
        
     }
     
-    public struct CoinFlyArgs : IVFXArguments
+    public struct ItemFlyArgs : IVFXArguments
     {
-        public VFXType Type => VFXType.COIN_FLY;
+        public VFXType Type => VFXType.ITEM_FLY;
         
         public int amount;
         public int prevAmount;

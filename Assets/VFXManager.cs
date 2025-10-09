@@ -120,7 +120,7 @@ namespace NamPhuThuy.VFX
             // Use pattern matching or switch on Type for positioning logic
             switch (args.Type)
             {
-                case VFXType.COIN_FLY when args is CoinFlyArgs coinArgs:
+                case VFXType.ITEM_FLY when args is ItemFlyArgs coinArgs:
                     vfx.transform.position = coinArgs.startPosition;
                     break;
                 case VFXType.POPUP_TEXT when args is PopupTextArgs popupArgs:
@@ -217,9 +217,9 @@ namespace NamPhuThuy.VFX
         #region Specific VFX Helpers
 
         // Specific helper methods for common cases
-        public CoinFlyArgs PlayCoinFly(int amount, int prevAmount, Transform target, Vector3 startPos, Transform interactTarget = null, System.Action onArrive = null, System.Action onComplete = null)
+        public ItemFlyArgs PlayCoinFly(int amount, int prevAmount, Transform target, Vector3 startPos, Transform interactTarget = null, System.Action onArrive = null, System.Action onComplete = null)
         {
-            var args = new CoinFlyArgs
+            var args = new ItemFlyArgs
             {
                 amount = amount,
                 prevAmount = prevAmount,
@@ -230,7 +230,7 @@ namespace NamPhuThuy.VFX
                 onComplete = onComplete
             };
 
-            var vfx = Get(VFXType.COIN_FLY);
+            var vfx = Get(VFXType.ITEM_FLY);
             if (vfx != null)
             {
                 vfx.Play(args);
