@@ -213,43 +213,6 @@ namespace NamPhuThuy.VFX
         }
 
         #endregion
-
-        #region Specific VFX Helpers
-
-        // Specific helper methods for common cases
-        public ItemFlyArgs PlayCoinFly(int amount, int prevAmount, Transform target, Vector3 startPos, Transform interactTarget = null, System.Action onArrive = null, System.Action onComplete = null)
-        {
-            var args = new ItemFlyArgs
-            {
-                amount = amount,
-                prevAmount = prevAmount,
-                target = target,
-                targetInteractTransform = interactTarget,
-                startPosition = startPos,
-                onArrive = onArrive,
-                onComplete = onComplete
-            };
-
-            var vfx = Get(VFXType.ITEM_FLY);
-            if (vfx != null)
-            {
-                vfx.Play(args);
-            }
-
-            return args;
-        }
-
-        public PopupTextArgs PlayPopupText(string message, Vector3 worldPos, Color color = default)
-        {
-            return Play(new PopupTextArgs
-            {
-                message = message,
-                worldPos = worldPos,
-                color = color == default ? Color.white : color
-            });
-        }
-
-        #endregion
     }
 
 }

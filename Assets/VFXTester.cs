@@ -143,13 +143,14 @@ namespace NamPhuThuy.VFX
         {
             if (GUILayout.Button(new GUIContent("Play VFX Popup Text", frogIcon)))
             {
-                VFXManager.Ins.PlayAt(
-                    type: VFXType.POPUP_TEXT,
-                    pos: managerAnchoredPos,
-                    amount: testAmount,
-                    message: testMessage,
-                    duration: testDuration
-                );
+                var popupArgs = new PopupTextArgs {
+                    message = "Hello!",
+                    worldPos = managerAnchoredPos,
+                    color = Color.white,
+                    duration = 1f,
+                    onComplete = null
+                };
+                VFXManager.Ins.Play<PopupTextArgs>(popupArgs);
             }
         }
 
@@ -157,29 +158,20 @@ namespace NamPhuThuy.VFX
         {
             if (GUILayout.Button(new GUIContent("Play VFX Coin Fly", frogIcon)))
             {
-                /*VFXManager.Ins.PlayAt(
-                    type: VFXType.COIN_FLY,
-                    target: _script.coinText.transform,
-                    interactTransform: _script.coinImage.transform,
-                    pos: VFXManager.Ins.transform.position,
-                    amount: testAmount,
-                    message: testMessage,
-                    duration: testDuration
-                );*/
-                
-                // NEW
                 var coinPanel = _script.coinImage.transform;
                 var coinText = _script.coinText.transform;
-
-                VFXManager.Ins.PlayCoinFly(
-                    amount: testAmount,
-                    prevAmount: 0,
-                    target: coinText.transform,
-                    startPos: VFXManager.Ins.transform.position,
-                    interactTarget: coinPanel.transform, // For positioning the target
-                    onArrive: () => Debug.Log("Coins arrived!"),
-                    onComplete: () => Debug.Log("Animation complete!")
-                );
+                
+                var itemFlyArgs = new ItemFlyArgs {
+                    amount = testAmount,
+                    prevAmount = 0,
+                    target = coinText.transform,
+                    startPosition = VFXManager.Ins.transform.position,
+                    targetInteractTransform = coinPanel.transform, // For positioning the target
+                    onArrive = () => Debug.Log("Coins arrived!"),
+                    onComplete = () => Debug.Log("Animation complete!")
+                };
+                
+                VFXManager.Ins.Play<ItemFlyArgs>(itemFlyArgs);
             }
         }
 
