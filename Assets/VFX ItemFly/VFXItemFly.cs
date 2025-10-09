@@ -119,7 +119,7 @@ namespace NamPhuThuy.VFX
 
             for (int i = 0; i < _poolSize; i++)
             {
-                var item = Instantiate(itemPrefab, args.worldPos, Quaternion.identity).GetComponent<RectTransform>();
+                var item = Instantiate(itemPrefab, transform.position, Quaternion.identity).GetComponent<RectTransform>();
                 item.SetParent(itemContainer.transform, true);
                 item.GetComponent<Image>().SetNativeSize();
 

@@ -98,46 +98,16 @@ namespace NamPhuThuy.VFX
             isUseVFXManagerPos = EditorGUILayout.Toggle("Use VFXManager Position", isUseVFXManagerPos);
 
             EditorGUILayout.Space(5);
-
-            // Test buttons
-            EditorGUILayout.BeginHorizontal();
-            
-            ButtonPlayCurrentVFX();
-            ButtonPlayAtCenterSceneView();
-            
-
-            EditorGUILayout.EndHorizontal();
             
             ButtonPlayPopupText();
             ButtonPlayCoinFly();
             ButtonStatChange();
+            
             // Quick test all VFX types
             EditorGUILayout.Space(5);
-            if (GUILayout.Button("Test All VFX Types"))
-            {
-                TestAllVFXTypes(VFXManager.Ins);
-            }
         }
 
         #region VFX-Buttons
-
-        private void ButtonPlayCurrentVFX()
-        {
-            Vector3 posi = testPosition;
-            if (isUseVFXManagerPos) posi = _script.GetComponent<RectTransform>().anchoredPosition;
-            
-            if (GUILayout.Button(new GUIContent("Play VFX", frogIcon)))
-            {
-                VFXManager.Ins.PlayAt(
-                    type: selectedVFXType,
-                    pos: posi,
-                    amount: testAmount,
-                    prevAmount: 0,
-                    message: testMessage,
-                    duration: testDuration
-                );
-            }
-        }
 
         private void ButtonPlayPopupText()
         {
@@ -198,47 +168,5 @@ namespace NamPhuThuy.VFX
 
 
         #endregion
-        
-
-        private void ButtonPlayAtCenterSceneView()
-        {
-            if (GUILayout.Button(new GUIContent("Play at Scene View Center", frogIcon)))
-            {
-                var sceneView = SceneView.lastActiveSceneView;
-                if (sceneView != null)
-                {
-                    Vector3 centerPos = sceneView.camera.transform.position + sceneView.camera.transform.forward * 5f;
-                    VFXManager.Ins.PlayAt(
-                        type: selectedVFXType,
-                        pos: centerPos,
-                        amount: testAmount,
-                        message: testMessage,
-                        duration: testDuration
-                    );
-                }
-            }
-        }
-
-        private void TestAllVFXTypes(VFXManager vfxManager)
-        {
-            var vfxTypes = System.Enum.GetValues(typeof(VFXType));
-            float spacing = 2f;
-            int index = 0;
-
-            foreach (VFXType vfxType in vfxTypes)
-            {
-                if (vfxType == VFXType.NONE) continue;
-
-                Vector3 pos = testPosition + Vector3.right * (index * spacing);
-                vfxManager.PlayAt(
-                    type: vfxType,
-                    pos: pos,
-                    amount: testAmount,
-                    message: $"{vfxType}",
-                    duration: testDuration
-                );
-                index++;
-            }
-        }
     }
 }

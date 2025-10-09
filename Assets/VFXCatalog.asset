@@ -22,18 +22,6 @@ MonoBehaviour:
     preload: 3
     softMaxAliveSeconds: 10
   - type: 3
-    prefab: {fileID: 5333861347414472640, guid: 7d682d08c93afdf47a650838110ab196, type: 3}
-    preload: 6
-    softMaxAliveSeconds: 10
-  - type: 4
-    prefab: {fileID: 9007307063897336273, guid: 9a4662b0a94c2cf45a96b59ba168a2ff, type: 3}
-    preload: 3
-    softMaxAliveSeconds: 10
-  - type: 5
-    prefab: {fileID: 1104607811237524045, guid: 0eb646ba5eb0ac748b165199768b0e87, type: 3}
-    preload: 6
-    softMaxAliveSeconds: 10
-  - type: 6
-    prefab: {fileID: 7477593028302975991, guid: 8a083a740e8098846b968a19adcf2dca, type: 3}
+    prefab: {fileID: 658901984484033640, guid: cb082a1bca56cbe4a8550a3fff281d63, type: 3}
     preload: 3
     softMaxAliveSeconds: 10

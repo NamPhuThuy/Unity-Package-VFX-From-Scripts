@@ -19,7 +19,6 @@ namespace NamPhuThuy.VFX
         [SerializeField] protected bool autoDisable = true; // return to pool when done  
 
         protected readonly List<Tween> tweens = new();
-        [SerializeField] protected VFXArguments args;
         [SerializeField] protected bool isPlaying;
         
         #endregion
@@ -52,35 +51,15 @@ namespace NamPhuThuy.VFX
         // Or use object if you prefer runtime type checking
         public abstract void Play(object args);
 
-        public void Play(VFXArguments _args)
-        {
-            if (isPlaying) StopImmediate(); // safety
-            isPlaying = true;
-            args = _args;
-
-            gameObject.SetActive(true);
-            args.onBegin?.Invoke();
-            
-            OnPlay(); // subclass visuals
-
-            if (lifeTime > 0f) Invoke(nameof(Complete), lifeTime); // safety timeout
-        }
-
         public void Complete()
         {
             if (!isPlaying) return;
             isPlaying = false;
 
-            args.onComplete?.Invoke();
             KillTweens();
 
             if (autoDisable) VFXManager.Ins.Release(this);
             else gameObject.SetActive(false);
-        }
-        
-        public void Arrive()
-        {
-            args.onArrive?.Invoke();
         }
         
         public void StopImmediate()

@@ -21,9 +21,6 @@ namespace NamPhuThuy.VFX
     {
         [SerializeField] private VFXCatalog vfxCatalog;
         
-        [SerializeField] private ResourceCollectVFXDatas resourceCollectVFXDatas;
-        public ResourceCollectVFXDatas ResourceCollectVFXDatas => resourceCollectVFXDatas;
-        
         // type -> pooled objects
         private readonly Dictionary<VFXType, Queue<VFXBase>> _pool = new();
         private readonly Dictionary<VFXBase, VFXType> _reverse = new();
@@ -42,20 +39,6 @@ namespace NamPhuThuy.VFX
             DebugLogger.LogSimple(message:$"anchored posi: {GetComponent<RectTransform>().anchoredPosition}");
             DebugLogger.LogSimple(message:$"rect position: {GetComponent<RectTransform>().position}");
             DebugLogger.LogSimple(message:$"transform position: {transform.position}");
-        }
-
-        void Update()
-        {
-            /*// safety cleanup
-            for (int i = _active.Count - 1; i >= 0; i--)
-            {
-                var h = _active[i];
-                if (!h.go || !h.go.activeSelf || Time.unscaledTime >= h.dieAt)
-                {
-                    if (h.go) ReturnToPool(h.type, h.go);
-                    _active.RemoveAt(i);
-                }
-            }*/
         }
 
         #endregion
@@ -135,30 +118,6 @@ namespace NamPhuThuy.VFX
         
 
         #region Public Methods
-
-        public VFXBase Play(VFXType type, VFXArguments args)
-        {
-            var v = Get(type);
-            if (!v) return null;
-
-            // position/orientation if given
-            if (args.worldPos != default)
-            {
-                v.transform.SetPositionAndRotation(args.worldPos, args.worldRot);
-            }
-            else if (args.targetTransform)
-            {
-                v.transform.position = args.targetTransform.position; 
-                v.transform.rotation = args.targetTransform.rotation;
-            }
-            else
-            {
-                v.transform.localPosition = Vector3.zero;
-            }
-
-            v.Play(args);
-            return v;
-        }
         
         public T Play<T>(T args) where T : struct, IVFXArguments
         {
@@ -171,45 +130,6 @@ namespace NamPhuThuy.VFX
             // Play with type-safe arguments
             vfx.Play(args);
             return args;
-        }
-        
-        
-
-        public VFXBase PlayAt(
-            VFXType type = VFXType.NONE, 
-            int amount = 0, 
-            int prevAmount = 0,
-            string message = null, 
-            Transform initialParent = null, 
-            Transform target = null,
-            Transform interactTransform = null,
-            Vector3 pos = default,
-            Vector3 offset = default,
-            Quaternion rot = default,
-            float duration = 0,
-            bool isLooping = false, 
-            Color color = default,
-            Action onArrive = null, 
-            Action onStepDone = null,
-            Action onComplete = null)
-        {
-            return Play(type, new VFXArguments {
-                amount = amount,
-                prevAmount = prevAmount,
-                message = message,
-                initialParent = initialParent,
-                targetTransform = target,
-                interactTransform = interactTransform,
-                worldPos = pos,
-                offset = offset,
-                worldRot = rot,
-                isLooping = isLooping,
-                duration = duration,
-                color = color,
-                onArrive = onArrive,
-                onStepDone = onStepDone,
-                onComplete = onComplete
-            });
         }
 
         #endregion
