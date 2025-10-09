@@ -53,8 +53,6 @@ namespace NamPhuThuy.VFX
             _canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        protected override void OnPlay() { /* Not used with new system */ }
-
         public override void Play<T>(T args)
         {
             if (args is PopupTextArgs popupArgs)

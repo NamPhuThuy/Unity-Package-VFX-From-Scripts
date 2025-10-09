@@ -1,11 +1,13 @@
+/*
+Github: https://github.com/NamPhuThuy
+*/
+
 using System;
 using System.Collections;
 using DG.Tweening;
 using NamPhuThuy.Common;
-using NamPhuThuy.Data;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -67,10 +69,6 @@ namespace NamPhuThuy.VFX
         }
 
         #endregion
-
-        protected override void OnPlay()
-        {
-        }
 
         #region Override Methods
 
@@ -208,17 +206,16 @@ namespace NamPhuThuy.VFX
                     realResourceText.text = $"{prevValue + totalAmount}";
                     
                     // NEW
-                    _currentArgs.onArrive?.Invoke();
                     _currentArgs.onComplete?.Invoke();
                 }
                 else
                 {
+                    _currentArgs.onItemInteract?.Invoke();
                     UpdateFakeResourceText();
                 }
 
                 reward.gameObject.SetActive(false);
             }));
-            // seq.Join(reward.DOSizeDelta(_coinImageSize, 0.2f).SetDelay(0.2f)).SetEase(Ease.InOutSine);
         }
 
         private void UpdateFakeResourceText()

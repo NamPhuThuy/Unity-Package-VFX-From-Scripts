@@ -1,3 +1,8 @@
+/*
+Github: https://github.com/NamPhuThuy
+*/
+
+
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -38,8 +43,6 @@ namespace NamPhuThuy.VFX
             for (int i = 0; i < tweens.Count; i++) tweens[i]?.Kill();
             tweens.Clear();
         }
-        
-        protected abstract void OnPlay(); // implement visuals here
         
         #endregion
 

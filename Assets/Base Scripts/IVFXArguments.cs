@@ -3,7 +3,6 @@ Github: https://github.com/NamPhuThuy
 */
 
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace NamPhuThuy.VFX
 {
@@ -24,7 +23,7 @@ namespace NamPhuThuy.VFX
         public Transform targetInteractTransform;
         public Sprite itemSprite;
         public Vector3 startPosition;
-        public System.Action onArrive;
+        public System.Action onItemInteract;
         public System.Action onComplete;
     }
     
@@ -50,5 +49,12 @@ namespace NamPhuThuy.VFX
         public System.Action onComplete;
     }
     
+    public struct ScreenShakeArgs : IVFXArguments
+    {
+        public VFXType Type => VFXType.SCREEN_SHAKE;
+        public float intensity;
+        public float duration;
+        public AnimationCurve shakeCurve;
+    }
     
 }

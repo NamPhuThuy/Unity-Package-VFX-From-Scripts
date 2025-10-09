@@ -58,8 +58,6 @@ namespace NamPhuThuy.VFX
             );
         }
 
-        protected override void OnPlay() { }
-
         public override void Play<T>(T args)
         {
             if (args is StatChangeTextArgs statArgs)

@@ -1,3 +1,8 @@
+/*
+Github: https://github.com/NamPhuThuy
+*/
+
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +15,8 @@ namespace NamPhuThuy.VFX
         POPUP_TEXT = 1,
         ITEM_FLY = 2,
         STAT_CHANGE_TEXT = 3,
-        BREAK_TILE = 7,
-        CONFETTI = 4,
+        SCREEN_SHAKE = 4,
+        CONFETTI = 7,
         BREAK_TILE_PARTICLE = 5,
         PARTICLE_STAR = 6,
     }

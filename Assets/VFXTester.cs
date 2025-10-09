@@ -21,39 +21,6 @@ namespace NamPhuThuy.VFX
         public Image coinImage;
         
         #endregion
-
-        #region Private Fields
-
-        #endregion
-
-        #region MonoBehaviour Callbacks
-
-        void Start()
-        {
-            
-        }
-
-        void Update()
-        {
-            
-        }
-
-        #endregion
-
-        #region Private Methods
-        #endregion
-
-        #region Public Methods
-        #endregion
-
-        #region Editor Methods
-
-        public void ResetValues()
-        {
-            
-        }
-
-        #endregion
     }
 
     [CustomEditor(typeof(VFXTester))]
@@ -102,6 +69,7 @@ namespace NamPhuThuy.VFX
             ButtonPlayPopupText();
             ButtonPlayCoinFly();
             ButtonStatChange();
+            ButtonScreenShake();
             
             // Quick test all VFX types
             EditorGUILayout.Space(5);
@@ -122,6 +90,7 @@ namespace NamPhuThuy.VFX
                 };
                 VFXManager.Ins.Play<PopupTextArgs>(args);
             }
+            
         }
 
         private void ButtonPlayCoinFly()
@@ -137,11 +106,25 @@ namespace NamPhuThuy.VFX
                     target = coinText.transform,
                     startPosition = VFXManager.Ins.transform.position,
                     targetInteractTransform = coinPanel.transform, // For positioning the target
-                    onArrive = () => Debug.Log("Coins arrived!"),
+                    onItemInteract = () => TurnOnStatChangeVFX(coinText),
                     onComplete = () => Debug.Log("Animation complete!")
                 };
                 
-                VFXManager.Ins.Play<ItemFlyArgs>(args);
+                VFXManager.Ins.Play(args);
+            }
+
+            void TurnOnStatChangeVFX(Transform coinText)
+            {
+                var args = new StatChangeTextArgs {
+                    amount = 10,
+                    color = Color.yellow,
+                    offset = Vector2.zero,
+                    moveDistance = new Vector2(0f, 30f),
+                    initialParent = coinText,
+                    onComplete = null
+                };
+                
+                VFXManager.Ins.Play(args);
             }
         }
         
@@ -162,6 +145,19 @@ namespace NamPhuThuy.VFX
                 };
                 
                 VFXManager.Ins.Play(args);
+            }
+        }
+
+        private void ButtonScreenShake()
+        {
+            if (GUILayout.Button(new GUIContent("Play Screen Shake", frogIcon)))
+            {
+                VFXManager.Ins.Play(new ScreenShakeArgs
+                {
+                    intensity = 0.5f,
+                    duration = 0.3f,
+                    shakeCurve = AnimationCurve.EaseInOut(0, 1, 1, 0)
+                });
             }
         }
 

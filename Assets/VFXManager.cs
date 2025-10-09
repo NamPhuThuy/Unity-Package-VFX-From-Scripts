@@ -1,9 +1,10 @@
-using System;
+/*
+Github: https://github.com/NamPhuThuy
+*/
+
 using System.Collections.Generic;
 using NamPhuThuy.Common;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.VFX;
 
 namespace NamPhuThuy.VFX
 {
