@@ -3,6 +3,7 @@ Github: https://github.com/NamPhuThuy
 */
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace NamPhuThuy.VFX
 {
@@ -20,7 +21,8 @@ namespace NamPhuThuy.VFX
         public int amount;
         public int prevAmount;
         public Transform target;
-        public Transform interactTarget;
+        public Transform targetInteractTransform;
+        public Sprite itemSprite;
         public Vector3 startPosition;
         public System.Action onArrive;
         public System.Action onComplete;

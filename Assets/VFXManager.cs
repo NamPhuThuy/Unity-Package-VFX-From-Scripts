@@ -224,7 +224,7 @@ namespace NamPhuThuy.VFX
                 amount = amount,
                 prevAmount = prevAmount,
                 target = target,
-                interactTarget = interactTarget,
+                targetInteractTransform = interactTarget,
                 startPosition = startPos,
                 onArrive = onArrive,
                 onComplete = onComplete

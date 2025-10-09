@@ -35,11 +35,11 @@ namespace NamPhuThuy.VFX
         [SerializeField] private GameObject container;
         [SerializeField] private TextMeshProUGUI fakeResourceText;
         [SerializeField] private TextMeshProUGUI realResourceText;
-        [SerializeField] private Transform targetResourceImage;
+        [SerializeField] private Transform targetInteractTransform;
 
         [Header("VFX")]
-        [SerializeField] private Sprite currentVFXSprite;
-        [SerializeField] private GameObject currentIconPrefab;
+        [SerializeField] private Sprite itemSprite;
+        [SerializeField] private GameObject itemPrefab;
         [SerializeField] private RectTransform[] iconList;
        
         [SerializeField] private RectTransform rippleFxCointainer;
@@ -71,9 +71,6 @@ namespace NamPhuThuy.VFX
 
         protected override void OnPlay()
         {
-            SetValues();
-            KillTweens();
-            StartCoroutine(TriggerCollectAnim());
         }
 
         #region Override Methods
@@ -82,19 +79,14 @@ namespace NamPhuThuy.VFX
         {
             if (args is CoinFlyArgs coinArgs)
             {
-                PlayCoinFly(coinArgs);
+                _currentArgs = coinArgs;
+                gameObject.SetActive(true);
+                SetValues();
+                KillTweens();
+                StartCoroutine(TriggerCollectAnim());
             }
         }
         
-        private void PlayCoinFly(CoinFlyArgs coinArgs)
-        {
-            _currentArgs = coinArgs;
-            gameObject.SetActive(true);
-            SetValues();
-            KillTweens();
-            StartCoroutine(TriggerCollectAnim());
-        }
-
         public override void Play(object args)
         {
             throw new NotImplementedException();
@@ -107,18 +99,12 @@ namespace NamPhuThuy.VFX
 
         private void SetValues()
         {
-            /*realResourceText = args.targetTransform.GetComponent<TextMeshProUGUI>();
-            targetPosition = args.interactTransform.position;
-            
-            totalAmount = args.amount;
-            prevValue = args.prevAmount;
-
-            _remainingItems = _poolSize;
-            _unitValue = totalAmount / _poolSize;*/
-            
-            // NEW
             realResourceText = _currentArgs.target.GetComponent<TextMeshProUGUI>();
-            targetPosition = _currentArgs.interactTarget ? _currentArgs.interactTarget.position : _currentArgs.target.position;
+            targetPosition = _currentArgs.targetInteractTransform ? _currentArgs.targetInteractTransform.transform.position : _currentArgs.target.position;
+            
+            targetInteractTransform = _currentArgs.targetInteractTransform ? _currentArgs.targetInteractTransform : null;
+            
+            itemSprite = _currentArgs.itemSprite ?? itemSprite;
         
             totalAmount = _currentArgs.amount;
             prevValue = _currentArgs.prevAmount;
@@ -134,7 +120,7 @@ namespace NamPhuThuy.VFX
 
             for (int i = 0; i < _poolSize; i++)
             {
-                var icon = Instantiate(currentIconPrefab, args.worldPos, Quaternion.identity).GetComponent<RectTransform>();
+                var icon = Instantiate(itemPrefab, args.worldPos, Quaternion.identity).GetComponent<RectTransform>();
                 icon.SetParent(container.transform, true);
                 icon.GetComponent<Image>().SetNativeSize();
 
@@ -147,7 +133,7 @@ namespace NamPhuThuy.VFX
 
         private IEnumerator TriggerCollectAnim()
         {
-            int itemSizeX = currentVFXSprite.texture.width;
+            int itemSizeX = itemSprite.texture.width;
             bool isAllCoinSpawned = false;
 
             for (int i = 0; i < _poolSize; i++)
@@ -180,7 +166,7 @@ namespace NamPhuThuy.VFX
 
             reward.gameObject.SetActive(true);
             image.SetSizeKeepRatioY(randomSizeX);
-            image.sprite = currentVFXSprite;
+            image.sprite = itemSprite;
             image.color = Color.white;
             
             reward.localPosition = new Vector3(Random.Range(-2 * itemSizeX, 2 * itemSizeX), Random.Range(-2 * itemSizeX, 2 * itemSizeX));
@@ -238,41 +224,37 @@ namespace NamPhuThuy.VFX
 
         private void UpdateFakeResourceText()
         {
-            if (_shakeFakeResourceTextTween != null && _shakeFakeResourceTextTween.IsComplete())
+            if (_shakeFakeResourceTextTween != null && _shakeFakeResourceTextTween.IsActive())
             {
-                // _shakeFakeResourceTextTween = _coinImage.DOPunchScale(0.15f * Vector3.one, 0.3f);
+                _shakeFakeResourceTextTween.Kill();
             }
-            else
-            {
-                // _shakeFakeResourceTextTween = _coinImage.DOPunchScale(0.15f * Vector3.one, 0.3f);
-            }
+
+            targetInteractTransform.localScale = Vector3.one;
+
+            _shakeFakeResourceTextTween = targetInteractTransform
+                .DOPunchScale(0.15f * Vector3.one, 0.3f);
 
             fakeResourceText.text = $"{prevValue + totalAmount - _remainingItems * _unitValue}";
         }
 
         private enum CurveType
         {
-            Exponential,
-            Sine,
-            Parabolic,
-            Linear
+            EXPONENTIAL = 0,
+            SINE = 1,
+            PARABOLIC = 2,
+            LINEAR = 3,
+            LOGARITHMIC = 4,
+            // BOUNCE = 5,
+            /*ZIGZAG = 6,
+            CIRCULAR = 7*/
         }
         
         private Vector2[] GenerateCurvePoints(int coinIndex)
         {
-            /*var points = new Vector2[CURVE_POINT_COUNT];
-            for (int j = 0; j < CURVE_POINT_COUNT; j++)
-            {
-                float x = (float)j / (CURVE_POINT_COUNT - 1);
-                float y = EvaluateSaturationCurve(x, CURVE_STRENGTH);
-                points[j] = new Vector2(x, y);
-            }
-            return points;*/
-            
             var points = new Vector2[CURVE_POINT_COUNT];
     
             // Create different curve types based on coin index
-            CurveType curveType = (CurveType)(coinIndex % 4);
+            CurveType curveType = (CurveType)(coinIndex % Enum.GetValues(typeof(CurveType)).Length);
     
             for (int j = 0; j < CURVE_POINT_COUNT; j++)
             {
@@ -281,17 +263,29 @@ namespace NamPhuThuy.VFX
         
                 switch (curveType)
                 {
-                    case CurveType.Exponential:
+                    case CurveType.EXPONENTIAL:
                         y = EvaluateSaturationCurve(x, CURVE_STRENGTH);
                         break;
-                    case CurveType.Sine:
+                    case CurveType.SINE:
                         y = Mathf.Sin(x * Mathf.PI * 0.5f) * 1.2f; // Arc shape
                         break;
-                    case CurveType.Parabolic:
+                    case CurveType.PARABOLIC:
                         y = x * x * 1.5f; // Steeper at end
                         break;
-                    case CurveType.Linear:
+                    case CurveType.LINEAR:
                         y = x; // Straight line
+                        break;
+                    case CurveType.LOGARITHMIC:
+                        y = Mathf.Log10(1 + 9 * x); // log curve, starts slow, ends fast
+                        break;
+                    /*case CurveType.BOUNCE:
+                        y = Mathf.Abs(Mathf.Sin(3 * Mathf.PI * x)) * (1 - x); // bouncy effect
+                        break;
+                    case CurveType.ZIGZAG:
+                        y = (j % 2 == 0) ? 0.2f : 0.8f; // sharp zigzag
+                        break;
+                    case CurveType.CIRCULAR:
+                        y = 1 - Mathf.Sqrt(1 - x * x); // quarter circle*/
                         break;
                 }
         
