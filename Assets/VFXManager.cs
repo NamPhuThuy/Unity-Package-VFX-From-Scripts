@@ -3,7 +3,6 @@ Github: https://github.com/NamPhuThuy
 */
 
 using System.Collections.Generic;
-using NamPhuThuy.Common;
 using UnityEngine;
 
 namespace NamPhuThuy.VFX

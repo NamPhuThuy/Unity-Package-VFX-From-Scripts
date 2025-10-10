@@ -5,7 +5,6 @@ Github: https://github.com/NamPhuThuy
 using System;
 using System.Collections;
 using DG.Tweening;
-using NamPhuThuy.Common;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -139,7 +138,7 @@ namespace NamPhuThuy.VFX
             }
 
             while (!isAllCoinSpawned)
-                yield return YieldHelper.Get(1f / 30);
+                yield return new WaitForSeconds(1f / 30);
 
             AutoFindResourceDisplay();
 
