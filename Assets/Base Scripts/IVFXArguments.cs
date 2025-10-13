@@ -4,7 +4,7 @@ Github: https://github.com/NamPhuThuy
 
 using UnityEngine;
 
-namespace NamPhuThuy.VFXFromScripts
+namespace NamPhuThuy.AnimateWithScripts
 {
     public interface IVFXArguments
     {

@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace NamPhuThuy.VFXFromScripts
+namespace NamPhuThuy.AnimateWithScripts
 {
     
     public abstract class VFXBase : MonoBehaviour

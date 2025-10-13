@@ -3,7 +3,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-namespace NamPhuThuy.VFXFromScripts
+namespace NamPhuThuy.AnimateWithScripts
 {
     public class VFXStatChangeText : VFXBase
     {

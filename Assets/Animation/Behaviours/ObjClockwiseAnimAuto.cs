@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace NamPhuThuy.VFXFromScripts
+namespace NamPhuThuy.AnimateWithScripts
 {
     public class ObjClockwiseAnimAuto : ObjActiveAuto
     {

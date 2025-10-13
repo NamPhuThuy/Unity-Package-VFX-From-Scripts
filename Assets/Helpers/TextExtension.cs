@@ -5,7 +5,7 @@ Github: https://github.com/NamPhuThuy
 using TMPro;
 using UnityEngine;
 
-namespace NamPhuThuy.VFXFromScripts
+namespace NamPhuThuy.AnimateWithScripts
 {
     
     public static class TextExtension

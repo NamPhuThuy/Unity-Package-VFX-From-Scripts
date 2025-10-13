@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NamPhuThuy.VFXFromScripts
+namespace NamPhuThuy.AnimateWithScripts
 {
     public abstract class ObjActiveAuto : MonoBehaviour
     {

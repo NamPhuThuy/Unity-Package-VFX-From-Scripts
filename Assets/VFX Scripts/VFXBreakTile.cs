@@ -5,7 +5,7 @@ using UnityEngine;
 using Spine.Unity;
 using Spine;
 
-namespace NamPhuThuy.VFXFromScripts
+namespace NamPhuThuy.AnimateWithScripts
 {
     public class VFXBreakTile : VFXBase
     {

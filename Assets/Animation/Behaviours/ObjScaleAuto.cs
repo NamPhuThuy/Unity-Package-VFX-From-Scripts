@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 
 
-namespace NamPhuThuy.VFXFromScripts
+namespace NamPhuThuy.AnimateWithScripts
 {
     public class ObjScaleAuto : ObjActiveAuto
     {
