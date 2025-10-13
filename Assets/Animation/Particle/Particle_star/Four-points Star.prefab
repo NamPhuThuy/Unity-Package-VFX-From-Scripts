@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1628911711428968290}
   - component: {fileID: 690868531972890161}
   m_Layer: 0
-  m_Name: Particle System 1
+  m_Name: Four-points Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9136183960604724805}
   serializedVersion: 8
-  lengthInSec: 0.2
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 2
   cullingMode: 0
@@ -55,8 +55,8 @@ ParticleSystem:
   autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
-    minMaxState: 3
-    scalar: 0.7
+    minMaxState: 0
+    scalar: 0
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.73
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -168,9 +168,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startSpeed:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 8
-      minScalar: 2
+      minScalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -294,7 +294,7 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0.28460443
+          value: 0.43243158
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -302,8 +302,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.9777832
-          value: 0.26521683
+          time: 1
+          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -445,7 +445,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -498,7 +498,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 3
+      minMaxState: 0
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -551,8 +551,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.87266463
+      minMaxState: 0
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -604,7 +604,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 11
+    maxNumParticles: 8
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -664,7 +664,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 5
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -672,7 +672,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 3, y: 3, z: 3}
+    m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
