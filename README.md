@@ -60,9 +60,9 @@ This is the short description about the project. Technologies, tools be used
  :smile:
 
 ## To do
-[] Change the package name into something like **Animate with Scripts**
-[] Add more scripts (AutoRotate, AutoMoveBetween)
-[] Add feature to change the setup for VFX/Animation (change the default font for VFXPopupText, add VFXPopupText.ChangeFont() API)
+- [] Change the package name into something like **Animate with Scripts**
+- [] Add more scripts (AutoRotate, AutoMoveBetween)
+- [] Add feature to change the setup for VFX/Animation (change the default font for VFXPopupText, add VFXPopupText.ChangeFont() API)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
