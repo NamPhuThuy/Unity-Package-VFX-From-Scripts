@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using UnityEditor;
 #endif
 
-namespace NamPhuThuy.VFX
+namespace NamPhuThuy.VFXFromScripts
 {
     
     public class VFXTester : MonoBehaviour

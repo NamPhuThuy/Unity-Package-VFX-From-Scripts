@@ -5,7 +5,7 @@ Github: https://github.com/NamPhuThuy
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NamPhuThuy.VFX
+namespace NamPhuThuy.VFXFromScripts
 {
     public struct VFXHandle
     {

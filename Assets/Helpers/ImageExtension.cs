@@ -5,7 +5,7 @@ Github: https://github.com/NamPhuThuy
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NamPhuThuy.VFX
+namespace NamPhuThuy.VFXFromScripts
 {
     
     public static class ImageExtension

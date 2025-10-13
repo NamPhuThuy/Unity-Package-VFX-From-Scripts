@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NamPhuThuy.VFX
+namespace NamPhuThuy.VFXFromScripts
 {
     public enum VFXType
     {

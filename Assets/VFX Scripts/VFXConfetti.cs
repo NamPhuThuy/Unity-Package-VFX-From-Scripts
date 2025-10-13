@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace NamPhuThuy.FVX
+namespace NamPhuThuy.VFXFromScripts
 {
     
     public class VFXConfetti : VFXBase

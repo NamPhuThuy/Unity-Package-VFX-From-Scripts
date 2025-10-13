@@ -1,4 +1,4 @@
-namespace NamPhuThuy.VFX
+namespace NamPhuThuy.VFXFromScripts
 {
     
     

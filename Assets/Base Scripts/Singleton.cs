@@ -4,7 +4,7 @@ Github: https://github.com/NamPhuThuy
 
 using UnityEngine;
 
-namespace NamPhuThuy.VFX
+namespace NamPhuThuy.VFXFromScripts
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {

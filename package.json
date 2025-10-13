@@ -1,8 +1,8 @@
 {
-    "name": "com.namphuthuy.vfxfromscripts",
+    "name": "com.namphuthuy.animatewithscripts",
     "version": "1.0.0",
-    "displayName": "VFX From Scripts",
-    "description": "Bunch of VFXs that use C# scripts.",
+    "displayName": "Animate With Scripts",
+    "description": "Bunch of Scripts can be used to animate things",
     "unity": "6000.0",
     "categories": 
     [
@@ -29,6 +29,6 @@
         "url": "https://github.com/NamPhuThuy"
     },
     "license": "MIT",
-    "changelogUrl": "https://github.com/NamPhuThuy/Unity-Package-VFX-From-Scripts/blob/main/changelog.md",
-    "documentationUrl": "https://github.com/NamPhuThuy/Unity-Package-VFX-From-Scripts"
+    "changelogUrl": "https://github.com/NamPhuThuy/UPack-Animate-with-Scripts/blob/main/changelog.md",
+    "documentationUrl": "https://github.com/NamPhuThuy/UPack-Animate-with-Scripts"
 }

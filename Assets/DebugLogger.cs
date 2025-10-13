@@ -14,7 +14,7 @@ Keep the suffix of class is "Logger" and prefix of method is "Log"
  - 
  */
 
-namespace NamPhuThuy.VFX
+namespace NamPhuThuy.VFXFromScripts
 {
     /// <summary>
     /// 
