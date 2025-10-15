@@ -4,6 +4,7 @@ Github: https://github.com/NamPhuThuy
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -41,7 +42,7 @@ namespace NamPhuThuy.AnimateWithScripts
         [Header("VFX")]
         [SerializeField] private Sprite itemSprite;
         [SerializeField] private GameObject itemPrefab;
-        [SerializeField] private RectTransform[] iconList;
+        [SerializeField] private List<RectTransform> iconList;
        
         [SerializeField] private RectTransform rippleFxCointainer;
         [SerializeField] private ParticleSystem rippleFx;
@@ -51,6 +52,7 @@ namespace NamPhuThuy.AnimateWithScripts
         #region Private Fields
 
         private readonly int _poolSize = 8;
+        private int _activeItemCount;
         private int _unitValue;
         private int _remainingItems;
         private ItemFlyArgs _currentArgs;
@@ -103,25 +105,31 @@ namespace NamPhuThuy.AnimateWithScripts
             itemSprite = _currentArgs.itemSprite ?? itemSprite;
         
             totalAmount = _currentArgs.amount;
-            prevValue = _currentArgs.prevAmount;
+            prevValue = _currentArgs.prevValue;
+            
+            _activeItemCount = Mathf.Max(1, _currentArgs.itemAmount);
+            EnsurePool(_activeItemCount);
 
-            _remainingItems = _poolSize;
+            _remainingItems = _activeItemCount;
             _unitValue = totalAmount / _poolSize;
             transform.position = _currentArgs.startPosition;
         }
         
         private void CreatePool()
         {
-            iconList = new RectTransform[_poolSize];
+            iconList = new List<RectTransform>(_poolSize);
+            EnsurePool(_poolSize);
+        }
 
-            for (int i = 0; i < _poolSize; i++)
+        private void EnsurePool(int required)
+        {
+            while (iconList.Count < required)
             {
                 var item = Instantiate(itemPrefab, transform.position, Quaternion.identity).GetComponent<RectTransform>();
                 item.SetParent(itemContainer.transform, true);
                 item.GetComponent<Image>().SetNativeSize();
-
-                iconList[i] = item;
                 item.gameObject.SetActive(false);
+                iconList.Add(item);
             }
         }
 
@@ -132,9 +140,9 @@ namespace NamPhuThuy.AnimateWithScripts
             int itemSizeX = itemSprite.texture.width;
             bool isAllCoinSpawned = false;
 
-            for (int i = 0; i < _poolSize; i++)
+            for (int i = 0; i < _activeItemCount; i++)
             {
-                SetupRewardItem(i, itemSizeX, () => isAllCoinSpawned = true, i == _poolSize - 1);
+                SetupRewardItem(i, itemSizeX, () => isAllCoinSpawned = true, i == _activeItemCount - 1);
             }
 
             while (!isAllCoinSpawned)
@@ -146,7 +154,7 @@ namespace NamPhuThuy.AnimateWithScripts
             fakeResourceText.gameObject.SetActive(true);
             fakeResourceText.text = prevValue.ToString();
 
-            for (int i = 0; i < _poolSize; i++)
+            for (int i = 0; i < _activeItemCount; i++)
             {
                 var curvePoints = GenerateCurvePoints(i);
                 AnimateRewardItem(i, curvePoints);

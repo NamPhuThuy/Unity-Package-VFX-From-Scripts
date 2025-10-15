@@ -19,7 +19,11 @@ namespace NamPhuThuy.AnimateWithScripts
         [Header("RESOURCES FLY")]
         public TextMeshProUGUI coinText;
         public Image coinImage;
-        
+
+        public int itemAmount = 8;
+        public int itemSpriteIndex = 0;
+        public Sprite[] itemSprites;
+
         #endregion
     }
 
@@ -67,7 +71,7 @@ namespace NamPhuThuy.AnimateWithScripts
             EditorGUILayout.Space(5);
             
             ButtonPlayPopupText();
-            ButtonPlayCoinFly();
+            ButtonPlayItemFly();
             ButtonStatChange();
             ButtonScreenShake();
             
@@ -93,19 +97,21 @@ namespace NamPhuThuy.AnimateWithScripts
             
         }
 
-        private void ButtonPlayCoinFly()
+        private void ButtonPlayItemFly()
         {
-            if (GUILayout.Button(new GUIContent("Play VFX Coin Fly", frogIcon)))
+            if (GUILayout.Button(new GUIContent("Play VFX Item Fly", frogIcon)))
             {
                 var coinPanel = _script.coinImage.transform;
                 var coinText = _script.coinText.transform;
                 
                 var args = new ItemFlyArgs {
                     amount = testAmount,
-                    prevAmount = 0,
+                    prevValue = 0,
                     target = coinText.transform,
                     startPosition = VFXManager.Ins.transform.position,
                     targetInteractTransform = coinPanel.transform, // For positioning the target
+                    itemAmount = _script.itemAmount,
+                    itemSprite = _script.itemSprites[_script.itemSpriteIndex],
                     onItemInteract = () => TurnOnStatChangeVFX(coinText),
                     onComplete = () => Debug.Log("Animation complete!")
                 };
@@ -116,7 +122,7 @@ namespace NamPhuThuy.AnimateWithScripts
             void TurnOnStatChangeVFX(Transform coinText)
             {
                 var args = new StatChangeTextArgs {
-                    amount = 10,
+                    amount = testAmount / _script.itemAmount,
                     color = Color.yellow,
                     offset = Vector2.zero,
                     moveDistance = new Vector2(0f, 30f),

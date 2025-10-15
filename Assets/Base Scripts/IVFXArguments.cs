@@ -2,6 +2,7 @@
 Github: https://github.com/NamPhuThuy
 */
 
+using System;
 using UnityEngine;
 
 namespace NamPhuThuy.AnimateWithScripts
@@ -18,13 +19,27 @@ namespace NamPhuThuy.AnimateWithScripts
         public VFXType Type => VFXType.ITEM_FLY;
         
         public int amount;
-        public int prevAmount;
+        public int prevValue;
+        public int itemAmount;
         public Transform target;
         public Transform targetInteractTransform;
         public Sprite itemSprite;
         public Vector3 startPosition;
         public System.Action onItemInteract;
         public System.Action onComplete;
+
+        /*public ItemFlyArgs()
+        {
+            this.amount = 0;
+            this.prevValue = 0;
+            this.itemAmount = 0;
+            this.target = null;
+            this.targetInteractTransform = null;
+            this.itemSprite = null;
+            this.startPosition = Vector3.zero;
+            this.onItemInteract = null;
+            this.onComplete = null;
+        }*/
     }
     
     public struct PopupTextArgs : IVFXArguments
@@ -41,7 +56,7 @@ namespace NamPhuThuy.AnimateWithScripts
     public struct StatChangeTextArgs : IVFXArguments
     {
         public VFXType Type => VFXType.STAT_CHANGE_TEXT;
-        public float amount;
+        public int amount;
         public Color color;
         public Vector2 offset;
         public Vector2 moveDistance;
