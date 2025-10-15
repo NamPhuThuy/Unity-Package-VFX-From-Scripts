@@ -1,6 +1,6 @@
 {
-    "name": "NamPhuThuy.VFX.DOTween",
-    "rootNamespace": "",
+    "name": "NamPhuThuy.AnimateWithScripts.DOTween",
+    "rootNamespace": "NamPhuThuy.AnimateWithScripts.DOTween",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
