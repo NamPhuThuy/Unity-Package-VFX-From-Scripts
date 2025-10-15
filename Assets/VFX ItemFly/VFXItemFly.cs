@@ -17,7 +17,6 @@ namespace NamPhuThuy.AnimateWithScripts
     {
         private const int CURVE_POINT_COUNT = 5;
         private const float CURVE_STRENGTH = 8f;
-        private const float SPAWN_DELAY = 0.12f;
         private const float INITIAL_DELAY = 0.2f;
         private const float BOUNCE_MIN = 100f;
         private const float BOUNCE_MAX = 200f;
@@ -46,15 +45,22 @@ namespace NamPhuThuy.AnimateWithScripts
        
         [SerializeField] private RectTransform rippleFxCointainer;
         [SerializeField] private ParticleSystem rippleFx;
+        
+        [Header("Timing")]
+        [Tooltip("Total duration from first spawn until last item lands")]
+        [SerializeField] private float totalVfxDuration = 1.6f;
+        [SerializeField] private float bounceDuration = 0.3f;
+        [SerializeField] private float pathDuration = 0.4f;
        
         private Tweener _shakeFakeResourceTextTween;
 
         #region Private Fields
 
-        private readonly int _poolSize = 8;
+        private readonly int _initialPoolSize = 8;
         private int _activeItemCount;
         private int _unitValue;
         private int _remainingItems;
+        private float _spawnStepDelay;
         private ItemFlyArgs _currentArgs;
         
         
@@ -108,17 +114,23 @@ namespace NamPhuThuy.AnimateWithScripts
             prevValue = _currentArgs.prevValue;
             
             _activeItemCount = Mathf.Max(1, _currentArgs.itemAmount);
+            _activeItemCount = Mathf.Max(1, _currentArgs.itemAmount > 0 ? _currentArgs.itemAmount : _initialPoolSize);
             EnsurePool(_activeItemCount);
 
             _remainingItems = _activeItemCount;
-            _unitValue = totalAmount / _poolSize;
+            _unitValue = totalAmount / _initialPoolSize;
+            
+            // Compute per-index delay so last item finishes at totalVfxDuration
+            float spacingBudget = Mathf.Max(0f, totalVfxDuration - INITIAL_DELAY - bounceDuration - pathDuration);
+            _spawnStepDelay = (_activeItemCount > 1) ? spacingBudget / (_activeItemCount - 1) : 0f;
+            
             transform.position = _currentArgs.startPosition;
         }
         
         private void CreatePool()
         {
-            iconList = new List<RectTransform>(_poolSize);
-            EnsurePool(_poolSize);
+            iconList = new List<RectTransform>(_initialPoolSize);
+            EnsurePool(_initialPoolSize);
         }
 
         private void EnsurePool(int required)
@@ -200,8 +212,12 @@ namespace NamPhuThuy.AnimateWithScripts
             var randomBouncePosition = reward.localPosition - new Vector3(0, Random.Range(BOUNCE_MIN, BOUNCE_MAX), 0);
 
             var seq = DOTween.Sequence();
-            seq.Append(reward.transform.DOLocalMove(randomBouncePosition, 0.3f).SetDelay(SPAWN_DELAY * index + INITIAL_DELAY).SetEase(Ease.InOutSine));
-            seq.Append(reward.transform.DOPath(path, 0.4f, PathType.CatmullRom).SetEase(Ease.InOutSine).OnComplete(() =>
+            
+            // Delay between items is dynamically spaced to keep total time constant:
+            float delay = INITIAL_DELAY + _spawnStepDelay * index;
+            
+            seq.Append(reward.transform.DOLocalMove(randomBouncePosition, 0.3f).SetDelay(delay).SetEase(Ease.InOutSine));
+            seq.Append(reward.transform.DOPath(path, pathDuration, PathType.CatmullRom).SetEase(Ease.InOutSine).OnComplete(() =>
             {
                 _remainingItems--;
 
