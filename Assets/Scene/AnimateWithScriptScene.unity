@@ -304,8 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ec2066f5b6b2546a9f5b7ac1ad36a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfxCatalog: {fileID: 11400000, guid: 0e3131829b9fd2b4da54191d16b6d213, type: 2}
-  resourceCollectVFXDatas: {fileID: 11400000, guid: b4f5bb1af0cf55c4faa249a8d637fc9a, type: 2}
+  vfxCatalog: {fileID: 11400000, guid: acfa961d03b4e4b4ebd7306479e380eb, type: 2}
 --- !u!114 &624557311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +319,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinText: {fileID: 219946952}
   coinImage: {fileID: 1607904963}
+  itemAmount: 8
+  itemSpriteIndex: 0
+  itemSprites:
+  - {fileID: 21300000, guid: b8762e43125c6c5448e4f8feb8bf8e4c, type: 3}
+  - {fileID: 21300000, guid: eebf39f244b36b043bb693f88a7ec2bb, type: 3}
+  - {fileID: 21300000, guid: f2a7a6c539116b0448cc0c2824ba5aeb, type: 3}
+  - {fileID: 21300000, guid: 019e6e47acc1d624291e958862d1207f, type: 3}
+  - {fileID: 21300000, guid: 4a7e558016f08204c95d9ad4fcc9104e, type: 3}
+  - {fileID: 21300000, guid: 31d378e5bdcc9074b89b34224559ab08, type: 3}
+  - {fileID: 21300000, guid: bb4b7a862b4a23444a2b2fd1341df75d, type: 3}
+  - {fileID: 21300000, guid: 1eb16da1d4e3a48469e9d310de11def7, type: 3}
+  - {fileID: 21300000, guid: 803267fd914fa454ca5d596529690b01, type: 3}
+  - {fileID: 21300000, guid: 2681e88280b67574bb79b6faf7fe5cab, type: 3}
+  - {fileID: 21300000, guid: 8ae74440219ba4d4094a34f097b20c37, type: 3}
+  - {fileID: 21300000, guid: 3a6dabdca6d94e243964f70d239a65b8, type: 3}
+  - {fileID: 21300000, guid: d0d911f5b00fd874bab97fba9f9acfe1, type: 3}
 --- !u!1 &852669849
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +511,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 490, y: 385}
-  m_SizeDelta: {x: 125, y: 125}
+  m_SizeDelta: {x: 137, y: 136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1607904963
 MonoBehaviour:
@@ -518,7 +533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6319756854316307725, guid: b8762e43125c6c5448e4f8feb8bf8e4c, type: 3}
+  m_Sprite: {fileID: -1181013667053476254, guid: 7931ad4fcbe076247ae761e82cd62974, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
